@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: UploadPageComponent },
   { path: 'login', component: UserLoginComponent },
   { path: 'notes', component: NotesListComponent },
   { path: 'uploads',  component: UploadPageComponent },
