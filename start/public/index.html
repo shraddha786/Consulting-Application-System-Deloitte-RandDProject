@@ -3,9 +3,10 @@
 
 <head>
   <title>Firestarter</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-cookies.min.js"></script>
   <script src="js/chirpApp.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="stylesheets/style.css">
@@ -16,14 +17,15 @@
     <div id='main' class="container">
         <nav class="navbar-fluid navbar-default navbar-fixed-top">
             <div class="container">
-              <a class="navbar-brand" href="#"> Deloitte Firestarter </a>
-              <p class="navbar-text"> The smarter way to apply for internships and graduate roles</p>
+              <a class="navbar-brand" href="#/"> Deloitte Firestarter </a>
+              <p class="navbar-text"> For interns and grads</p>
               <p class="navbar-right navbar-text" ng-hide="authenticated"><a href="#/login">Login</a> or <a href="#/register">Register</a></p>
               <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/logout" ng-click="signout()">Logout</a></p>
               <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user}}</p>
+              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/cookieBaker">Cookie Functionality</a></p>
               <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/upload">CV upload</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/login">Personal Details</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/login">Video Interview</a></p>
+              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/userProfile">Personal Details</a></p>
+              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/videoInterview">Video Interview</a></p>
             </div>
           </nav>
       <div ng-view></div>
