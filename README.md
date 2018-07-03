@@ -14,10 +14,6 @@ Places data modification and models will take place is:
 
 A super useful tool to help you in these endeavours is Postman:
 
-
-![alt text](https://4.bp.blogspot.com/-7n-CEqQTQzo/WY1vmo7ZWvI/AAAAAAAAH_Q/GQtdcYEy-hMmoNvx0d2IJ777_WTiSW1IQCEwYBhgL/s1600/Postman.jpg "Postman Pat")
-
-WRONG POSTMAN THIS POSTMAN
 ![alt text](https://i1.wp.com/thecuriousdev.org/wp-content/uploads/2017/12/gI_62552_200x200_360-logo.png?fit=201%2C201&ssl=1 "Not Postman Pat")
 
 This software can be found [Here](https://www.getpostman.com/) and can be used to make custom API calls in order to tesk the system whenever, ask Max about how Postman can be used to easily work through main tasks
