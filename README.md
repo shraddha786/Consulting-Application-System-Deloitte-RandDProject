@@ -1,5 +1,5 @@
 **Roles and responsibilities**
-
+NOTE: a lot of code exists on the front end which will need to be changed later for security purposes
 #### Shraddha
 ##### Main Tasks
 | Location        | Task                                      | Difficulty  |
@@ -47,7 +47,14 @@ Preferred styling:
 Sass, Bootstrap
 
 #### Craig
+| Location        | Task                                      | Difficulty  |
+| --------------- |:-----------------------------------------:| -----------:|
+| Authorizations      | Work towards authorizing and maintaining persistance, change components based on authorizations       | Difficult   |
+| Cookies       | Write cookies and set events and login persistance based on these cookies | Difficult        |
 
+This will be quite difficult and seeing issues with this I will personally run you through this with examples in a hackathon style
+______________________________________________________________
+______________________________________________________________
 ______________________________________________________________
 **Initial Setup**
 
