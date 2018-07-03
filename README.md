@@ -27,7 +27,7 @@ Sass, Bootstrap
 
 #### Craig
 
-
+______________________________________________________________
 **Initial Setup**
 
 When building and deploying this setup from the first time you must perform the following actions.
