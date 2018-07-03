@@ -1,3 +1,33 @@
+**Roles and responsibilities**
+
+#### Shraddha
+
+#### Dominik
+##### Main Tasks
+| Location        | Task                                      | Difficulty  |
+| --------------- |:-----------------------------------------:| -----------:|
+| public htmls    | Mod code to look better, add layout       | Medium      |
+| style css       | Style code roughly on Deloitte guidelines | Medium      |
+| routemap        | Create a logical idea of cookies and auth | Difficult   |
+
+Deloitte primary font:
+~Verdana~
+    Secondary font:
+    ~Helvetica~
+
+Color schemes:
+Primary( Black #000000, White #ffffff, Deloitte Green #86BC25 )
+
+Secondary (Green 2 #C4D600, Green 7 #2C5234, Cool Gray 2 #D0D0CE)
+
+Full colour scheme can be found [Here](https://www2.deloitte.com/content/dam/Deloitte/sg/Documents/careers/sg-careers-deloitte-sg-50th-anniversary-art-competition-art-colour-palette.pdf)
+
+Preferred styling:
+Sass, Bootstrap
+
+#### Craig
+
+
 **Initial Setup**
 
 When building and deploying this setup from the first time you must perform the following actions.
