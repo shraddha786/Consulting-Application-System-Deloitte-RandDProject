@@ -8,11 +8,13 @@
 | Model Checks       | Perform rough gap analysis on what data we need and what data /models we have from DB to sys perspective | Easy        |
 
 Places data modification and models will take place is:
-* models/models.js
-* routes/relevantFile.js
-* app.js
+1. models/models.js
+2. routes/relevantFile.js
+3. app.js
 
-A super useful tool to help you in these endeavours is Postman: 
+A super useful tool to help you in these endeavours is Postman:
+
+
 ![alt text](https://4.bp.blogspot.com/-7n-CEqQTQzo/WY1vmo7ZWvI/AAAAAAAAH_Q/GQtdcYEy-hMmoNvx0d2IJ777_WTiSW1IQCEwYBhgL/s1600/Postman.jpg "Postman Pat")
 
 WRONG POSTMAN THIS POSTMAN
