@@ -1,8 +1,49 @@
+/*
 body {
   padding: 50px;
   font: 14px "Comic Sans MS", cursive, sans-serif;
 }
-
+*/
 a {
   color: #00B7FF;
+}
+
+body {
+  padding-top:70px;
+  width: 100%;
+  height: 100%;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 14px;
+}
+
+a {
+	color: #00B7FF;
+}
+
+.submit-btn {
+	background-color: #b1dbff;
+	margin: 10px 0 10px 0;
+}
+
+.post {
+	padding: 10px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.odd {
+	background-color: #f2f9ff;
+	
+}
+.even {
+	background-color: #eceff3;
+}
+
+.form-auth {
+	max-width: 330px;
+	padding: 5px;
+	margin: 0 auto;
 }
