@@ -1,33 +1,53 @@
 <!--index.html-->
-<html>
-
-<head>
+<!DOCTYPE html>
+<html lang="en">
+<head ng-app="chirpApp">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Firestarter</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-resource.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-cookies.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-cookies.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
   <script src="js/chirpApp.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="stylesheets/style.css">
+
+  <!--<link rel="stylesheet" href="start/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css">-->
+  <!--<script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>-->
 </head>
 
-<body ng-app="chirpApp">
+<body>
   <div class="col-md-offset-2 col-md-8">
     <div id='main' class="container">
-        <nav class="navbar-fluid navbar-default navbar-fixed-top">
-            <div class="container">
-              <a class="navbar-brand" href="#/"> Deloitte Firestarter </a>
-              <p class="navbar-text"> For interns and grads</p>
-              <p class="navbar-right navbar-text" ng-hide="authenticated"><a href="#/login">Login</a> or <a href="#/register">Register</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/logout" ng-click="signout()">Logout</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user}}</p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/cookieBaker">Cookie Functionality</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/upload">CV upload</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/userProfile">Personal Details</a></p>
-              <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#/videoInterview">Video Interview</a></p>
-            </div>
-          </nav>
+      <nav class="navbar-fluid navbar-default navbar-fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#/"> Deloitte Firestarter </a>
+          <p class="navbar-text"> For interns and grads</p>
+          <p class="navbar-right navbar-text" ng-hide="authenticated">
+            <a href="#/login">Login</a> or
+            <a href="#/register">Register</a>
+          </p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">
+            <a href="#/logout" ng-click="signout()">Logout</a>
+          </p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user}}</p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">
+            <a href="#/cookieBaker">Cookie Functionality</a>
+          </p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">
+            <a href="#/upload">CV upload</a>
+          </p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">
+            <a href="#/userProfile">Personal Details</a>
+          </p>
+          <p class="navbar-right navbar-text" ng-show="authenticated">
+            <a href="#/videoInterview">Video Interview</a>
+          </p>
+        </div>
+      </nav>
       <div ng-view></div>
     </div>
   </div>
