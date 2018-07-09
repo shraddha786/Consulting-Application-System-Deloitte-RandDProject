@@ -1,5 +1,5 @@
 //chirpApp.js
-var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ui.bootstrap']).run(function($rootScope, $http, $location, $cookies){
+var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap']).run(function($rootScope, $http, $location, $cookies){
   $rootScope.authenticated = false;
   $rootScope.current_user = "";
 
