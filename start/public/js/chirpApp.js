@@ -137,6 +137,7 @@ app.controller('fileController', function($rootScope, $scope, uploadService){
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send();
 
+    alert("File has been deleted from the system");
     /** USING SIMILAR TO BYPASS 1.2.0 to 1.4.0 ERROR $http.post('/auth/login', $scope.user).success(function(data){
       if(data.user.username != ""){
         $rootScope.authenticated = true;
