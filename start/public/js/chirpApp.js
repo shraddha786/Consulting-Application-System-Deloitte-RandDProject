@@ -131,7 +131,12 @@ app.controller('fileController', function($rootScope, $scope, uploadService){
   $scope.files = uploadService.query();
   
   $scope.delete = function(){
-    alert("DELETE CODE NEEDS TO BE ADDED INTO chirpApp.js");
+    var id = prompt("Please confirm the ID of the file:", "");
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "http://localhost:3000/upload/files/"+id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+
     /** USING SIMILAR TO BYPASS 1.2.0 to 1.4.0 ERROR $http.post('/auth/login', $scope.user).success(function(data){
       if(data.user.username != ""){
         $rootScope.authenticated = true;
