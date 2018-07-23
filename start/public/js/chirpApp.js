@@ -51,6 +51,11 @@ app.config(function($routeProvider){
     .when('/upload', {
       templateUrl: 'cvupload.html',
       controller: 'fileController'
+    })
+    //the MailGun display
+    .when('/mailGun', {
+      templateUrl: 'mailGunner.html',
+      controller: 'mailController'
     });
 });
 
@@ -64,9 +69,10 @@ app.factory('uploadService', function($resource){
 });
 
 //Cookie functionality showcase
-app.controller('cookieBaker', function($scope, $cookies){
+app.controller('cookieBaker', function($rootScope, $scope, $cookies){
+
   $cookies.put('userCookie', 'set');
-  $cookies.put('authCookie', 'set');
+  $cookies.put('authenCookie', 'set');
 
   $scope.myCookieVal = $cookies.get('cookie');
   $scope.myUserCookie = $cookies.get('userCookie');
@@ -75,10 +81,6 @@ app.controller('cookieBaker', function($scope, $cookies){
   $scope.setCookie = function(val) {
       $cookies.put('cookie', val);
   }
-});
-
-app.controller('fileController', function($scope, $cookies){
-  $cookies.put('cookie', 'logout cookie');
 });
 
 app.controller('mainController', function($rootScope, $scope, postService){
@@ -93,6 +95,10 @@ app.controller('mainController', function($rootScope, $scope, postService){
       $scope.newPost = {created_by: '', text: '', created_at: ''};
     });
   };
+});
+
+app.controller('mailController', function($rootScope, $scope, postService){
+  
 });
 
 app.controller('authController', function($scope, $rootScope, $http, $location){
@@ -123,4 +129,16 @@ app.controller('authController', function($scope, $rootScope, $http, $location){
 app.controller('fileController', function($rootScope, $scope, uploadService){
    
   $scope.files = uploadService.query();
+  
+  $scope.delete = function(){
+    alert("DELETE CODE NEEDS TO BE ADDED INTO chirpApp.js");
+    /** USING SIMILAR TO BYPASS 1.2.0 to 1.4.0 ERROR $http.post('/auth/login', $scope.user).success(function(data){
+      if(data.user.username != ""){
+        $rootScope.authenticated = true;
+        $rootScope.current_user = data.user.username;
+
+        $location.path('/');
+      }
+    });**/
+  };
 });
