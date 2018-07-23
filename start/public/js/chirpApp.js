@@ -124,3 +124,14 @@ app.controller('fileController', function($rootScope, $scope, uploadService){
    
   $scope.files = uploadService.query();
 });
+
+app.controller('AlertsController', function($scope){
+  $scope.alerts = [
+    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line' },
+
+  ];
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+});

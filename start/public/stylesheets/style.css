@@ -1,12 +1,3 @@
-/*
-body {
-  padding: 50px;
-  font: 14px "Comic Sans MS", cursive, sans-serif;
-}
-*/
-a {
-  color: #00B7FF;
-}
 
 body {
   padding-top:70px;
@@ -20,7 +11,7 @@ body {
 }
 
 a {
-	color: #00B7FF;
+	color: #86BC25;
 }
 
 .submit-btn {
@@ -46,4 +37,13 @@ a {
 	max-width: 330px;
 	padding: 5px;
 	margin: 0 auto;
+}
+
+.navbar-fluid {
+  background-color: black;
+}
+
+.navbar-fluid .navbar-text {
+  background-color: black;
+  color: white;
 }
