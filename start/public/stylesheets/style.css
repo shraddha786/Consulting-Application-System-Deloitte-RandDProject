@@ -8,6 +8,7 @@ body {
   padding: 50px;
   font-family: Verdana, Geneva, sans-serif;
   font-size: 14px;
+  background: #D0D0CE;
 }
 
 a {
@@ -46,4 +47,14 @@ a {
 .navbar-fluid .navbar-text {
   background-color: black;
   color: white;
+}
+
+.btn {
+  background-color: #86BC25;
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: #009A44;
+  color: black;
 }
