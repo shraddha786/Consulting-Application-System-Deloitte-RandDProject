@@ -148,7 +148,7 @@ app.controller('fileController', function($rootScope, $scope, uploadService){
 app.controller('AlertsController', function($scope, $rootScope){
   $rootScope.alerts = [
     { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line.' +
-    'Please first read this page to learn more about Deloitte Consulting and then create your Deloitte Careers account and login.' },
+    ' Please first read this page to learn more about Deloitte Consulting and then create your Deloitte Careers account to login.' },
 
   ];
 
