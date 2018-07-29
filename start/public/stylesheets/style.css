@@ -58,3 +58,23 @@ a {
   background-color: #009A44;
   color: black;
 }
+
+.progress {
+  background: rgba(255, 255, 255, 1);
+  border: 0px solid rgba(255, 255, 255, 1);
+  border-radius: 0px;
+  height: 40px;
+}
+
+.progress-bar-custom {
+  background: #43B02A;
+  height: 40px;
+}
+
+#progressBarID {
+  margin-top: 15px;
+}
+
+#alertID {
+  margin-top: 15px;
+}

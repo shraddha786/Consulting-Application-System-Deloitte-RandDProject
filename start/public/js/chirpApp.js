@@ -8,6 +8,18 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.authenticated = false;
     $rootScope.current_user = "";
   };
+
+  $rootScope.$on('$routeChangeStart', function(event, next, current){
+    if ($location.path() == '/login' || $location.path() == '/register') {
+      $rootScope.hidealert = true;
+      $rootScope.hideprog = true;
+    }
+    else
+    {
+      $rootScope.hidealert = false;
+      $rootScope.hideprog = false;
+    };
+  });
 });
 
 app.config(function($routeProvider){
@@ -106,6 +118,14 @@ app.controller('authController', function($scope, $rootScope, $http, $location){
         $rootScope.current_user = data.user.username;
 
         $location.path('/');
+
+        $rootScope.alerts = [
+          { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+      
+        ];
+
+        var value = 2; //affects progress bar
+        $rootScope.dynamic = value;
       }
     });
   };
@@ -125,13 +145,31 @@ app.controller('fileController', function($rootScope, $scope, uploadService){
   $scope.files = uploadService.query();
 });
 
-app.controller('AlertsController', function($scope){
-  $scope.alerts = [
-    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line' },
+app.controller('AlertsController', function($scope, $rootScope){
+  $rootScope.alerts = [
+    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line.' +
+    'Please first read this page to learn more about Deloitte Consulting and then create your Deloitte Careers account and login.' },
 
   ];
 
-  $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
+  /*
+  if ($rootScope.authenticated = true)
+  {
+    $rootScope.alerts = [
+      { type: 'info', msg: 'Great!' },
+  
+    ];
+  }
+  */
+
+  $rootScope.closeAlert = function(index) {
+    $rootScope.alerts.splice(index, 1);
   };
+});
+
+app.controller('ProgressBarController', function($scope, $rootScope){
+  $rootScope.max = 5;
+  var value = 1;
+
+  $rootScope.dynamic = value;
 });

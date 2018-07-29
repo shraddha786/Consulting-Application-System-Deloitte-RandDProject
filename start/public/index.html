@@ -21,13 +21,16 @@
 <body>
   <div class="col-md-offset-2 col-md-8">
     <div id='main' class="container-fluid">
-      <div ng-controller="AlertsController">
-          <script type="text/ng-template" id="alert.html">
-            <div class="alert">
-            <div ng-transclude></div>
-          </script>
-          <div uib-alert ng-repeat="alert in alerts" style="background-color: #53565A; color: white" ng-class="'alert-' + (alert.type || 'info')" close="closeAlert($index)">{{alert.msg}}</div>
-      </div>
+        <div ng-controller="AlertsController" ng-hide="hidealert" id="alertID">
+            <script type="text/ng-template" id="alert.html">
+              <div class="alert">
+              <div ng-transclude></div>
+            </script>
+            <div uib-alert ng-repeat="alert in alerts" style="background-color: #53565A; color: white" ng-class="'alert-' + (alert.type || 'info')" close="closeAlert($index)">{{alert.msg}}</div>
+        </div>
+        <div ng-controller="ProgressBarController" ng-hide="hideprog" id="progressBarID">
+          <uib-progressbar max="max" value="dynamic"><div class="progress"><div class="progress-bar-custom"><span style="color:white; white-space:nowrap;"></span></div></div></uib-progressbar>
+        </div>
       <nav class="navbar-fluid navbar-default navbar-fixed-top">
         <div class="container">
           <a class="navbar-left" href="#/"><img src="images/Deloitte-D.jpg"  style="height:50px;"></a>
