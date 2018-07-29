@@ -1,5 +1,5 @@
 //chirpApp.js
-var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies']).run(function($rootScope, $http, $location, $cookies){
+var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap']).run(function($rootScope, $http, $location, $cookies){
   $rootScope.authenticated = false;
   $rootScope.current_user = "";
 
@@ -123,4 +123,15 @@ app.controller('authController', function($scope, $rootScope, $http, $location){
 app.controller('fileController', function($rootScope, $scope, uploadService){
    
   $scope.files = uploadService.query();
+});
+
+app.controller('AlertsController', function($scope){
+  $scope.alerts = [
+    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line' },
+
+  ];
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
 });
