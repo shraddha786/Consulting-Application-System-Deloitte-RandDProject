@@ -47,6 +47,11 @@ app.config(function($routeProvider){
       templateUrl: 'personalInformation.html',
       controller: 'mainController'
     })
+    //the mail page display
+    .when('/mailgunner', {
+      templateUrl: 'mailGunner.html',
+      controller: 'mailController'
+    })
     //the CV display
     .when('/upload', {
       templateUrl: 'cvupload.html',
@@ -61,6 +66,13 @@ app.factory('postService', function($resource){
 app.factory('uploadService', function($resource){
 
   return $resource('/upload/:id');
+});
+
+//Mail functionality showcase
+app.controller('mailController', function($scope, $cookies, $http){
+  $scope.mail = function(){
+    $http.get('/mailgun');
+  }
 });
 
 //Cookie functionality showcase
@@ -121,7 +133,14 @@ app.controller('authController', function($scope, $rootScope, $http, $location){
 });
 
 app.controller('fileController', function($rootScope, $scope, uploadService){
-   
+  $scope.delete = function(){
+    var id = prompt("Please confirm the ID of the file:", "");
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "http://localhost:3000/upload/files/"+id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+  }
+
   $scope.files = uploadService.query();
 });
 
