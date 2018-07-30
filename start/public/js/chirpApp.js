@@ -47,6 +47,11 @@ app.config(function($routeProvider){
       templateUrl: 'personalInformation.html',
       controller: 'mainController'
     })
+    //the mail page display
+    .when('/mailgunner', {
+      templateUrl: 'mailGunner.html',
+      controller: 'mailController'
+    })
     //the CV display
     .when('/upload', {
       templateUrl: 'cvupload.html',
@@ -61,6 +66,13 @@ app.factory('postService', function($resource){
 app.factory('uploadService', function($resource){
 
   return $resource('/upload/:id');
+});
+
+//Mail functionality showcase
+app.controller('mailController', function($scope, $cookies, $http){
+  $scope.mail = function(){
+    $http.get('/mailgun');
+  }
 });
 
 //Cookie functionality showcase
