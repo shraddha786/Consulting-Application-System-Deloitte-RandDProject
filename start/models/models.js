@@ -10,6 +10,10 @@ var postSchema = new mongoose.Schema({
 var userSchema = new mongoose.Schema({
 	username: String,
 	password: String, //hash created from password
+	email: String,
+	desired_location: String,
+	date_of_birth: String,
+	role: String,
 	created_at: {type: Date, default: Date.now}
 })
 
