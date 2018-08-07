@@ -35,7 +35,7 @@ app.get('/mailgun', function(req, res, next) {
         from: 'Employment <maxfrancis212@gmail.com>',
         to: 'maxfrancis212@gmail.com',
         subject: 'Rejected',
-        text: 'You smell like Camembert, go away!, Deloitte Recruiting'
+        text: 'You smell like Camembert go away!, Deloitte Recruiting'
       };
        
       mailgun.messages().send(data, function (error, body) {});

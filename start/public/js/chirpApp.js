@@ -52,6 +52,11 @@ app.config(function ($routeProvider) {
       templateUrl: 'mailGunner.html',
       controller: 'mailController'
     })
+    //the Internal Staff Member Dashboard
+    .when('/ismDashboard', {
+      templateUrl: 'InternalStaffDashboard.html',
+      controller: 'ismController'
+    })
     //the CV display
     .when('/upload', {
       templateUrl: 'cvupload.html',
@@ -67,8 +72,17 @@ app.factory('postService', function ($resource) {
   return $resource('/api/posts/:id');
 });
 
-app.factory('uploadService', function ($resource) {
+app.factory('accountService', function($resource) {
+  return $resource('/api/accounts/:username');
+});
 
+app.controller('ismController', function ($rootScope, $scope, accountService) {
+  
+  $scope.users = accountService.query();
+
+});
+
+app.factory('uploadService', function ($resource) {
   return $resource('/upload/:id');
 });
 

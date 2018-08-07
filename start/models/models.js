@@ -14,7 +14,11 @@ var userSchema = new mongoose.Schema({
 	desired_location: String,
 	date_of_birth: String,
 	role: String,
-	created_at: {type: Date, default: Date.now}
+	created_at: {type: Date, default: Date.now},
+	stage: Number,
+	processing: Boolean,
+	priority: Boolean,
+	rejected: Boolean
 })
 
 
