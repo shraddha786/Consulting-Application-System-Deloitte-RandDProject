@@ -18,7 +18,8 @@ var userSchema = new mongoose.Schema({
 	stage: Number,
 	processing: Boolean,
 	priority: Boolean,
-	rejected: Boolean
+	rejected: Boolean,
+	is_staff: Boolean
 })
 
 

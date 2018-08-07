@@ -1,9 +1,15 @@
 <div class="clearfix">
     <H4 >Applicants</p>
+        
 
     <div class="post" ng-repeat="user in users | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'">
-      <p>{{user.username}}</p>
-      <button>hire</button>
-      <button>fire</button>
+        <tr>
+            <td>NAME: {{user.username}}</td>
+            <td>DESIRED LOCATION: {{user.desired_location}}</td>
+            <td>ROLE: {{user.role}}</td>
+            <td><button>Hire</button></td>
+            <td><button>Fire</button></td>
+        </tr>
     </div>
+
 </div>
