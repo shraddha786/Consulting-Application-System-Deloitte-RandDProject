@@ -195,6 +195,14 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
             $rootScope.role = data.user.role;
 
             $location.path('/');
+
+            $rootScope.alerts = [
+              { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+          
+            ];
+    
+            var value = 2; //affects progress bar
+            $rootScope.dynamic = value;
           }
         }
         catch (err) {
@@ -231,13 +239,31 @@ app.controller('fileController', function ($rootScope, $scope, uploadService) {
   $scope.files = uploadService.query();
 });
 
-app.controller('AlertsController', function ($scope) {
-  $scope.alerts = [
-    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line' },
+app.controller('AlertsController', function($scope, $rootScope){
+  $rootScope.alerts = [
+    { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line.' +
+    ' Please first read this page to learn more about Deloitte Consulting and then create your Deloitte Careers account to login.' },
 
   ];
 
-  $scope.closeAlert = function (index) {
-    $scope.alerts.splice(index, 1);
+  /*
+  if ($rootScope.authenticated = true)
+  {
+    $rootScope.alerts = [
+      { type: 'info', msg: 'Great!' },
+  
+    ];
+  }
+  */
+
+  $rootScope.closeAlert = function(index) {
+    $rootScope.alerts.splice(index, 1);
   };
+});
+
+app.controller('ProgressBarController', function($scope, $rootScope){
+  $rootScope.max = 5;
+  var value = 1;
+
+  $rootScope.dynamic = value;
 });

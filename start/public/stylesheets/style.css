@@ -15,6 +15,10 @@ a {
 	color: #86BC25;
 }
 
+h1 {
+  font-size: 50px;
+}
+
 .submit-btn {
 	background-color: #b1dbff;
 	margin: 10px 0 10px 0;
@@ -58,3 +62,33 @@ a {
   background-color: #009A44;
   color: black;
 }
+
+.progress {
+  background: rgba(255, 255, 255, 1);
+  border: 0px solid rgba(255, 255, 255, 1);
+  border-radius: 0px;
+  height: 40px;
+}
+
+.progress-bar-custom {
+  background: #43B02A;
+  height: 40px;
+  padding-top: 10px;
+}
+
+.progress span {
+  font-size: 15px;
+}
+
+#progressBarID {
+  margin-top: 15px;
+}
+
+#alertID {
+  margin-top: 15px;
+}
+
+#content {
+  background-color: #BBBCBC;
+}
+
