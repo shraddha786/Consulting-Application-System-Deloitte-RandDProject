@@ -8,6 +8,17 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.authenticated = false;
     $rootScope.current_user = "";
   };
+  $rootScope.$on('$routeChangeStart', function(event, next, current){
+    if ($location.path() == '/login' || $location.path() == '/register') {
+      $rootScope.hidealert = true;
+      $rootScope.hideprog = true;
+    }
+    else
+    {
+      $rootScope.hidealert = false;
+      $rootScope.hideprog = false;
+    };
+  });
 });
 
 app.config(function ($routeProvider) {
