@@ -204,6 +204,7 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
             $rootScope.desired_location = data.user.desired_location;
             $rootScope.date_of_birth = data.user.date_of_birth;
             $rootScope.role = data.user.role;
+            $rootScope._id = data.user._id;// Fixed
 
             $location.path('/');
 
@@ -236,6 +237,21 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
       }
     });
   };
+
+  // Hardcoded function to test information update
+  $scope.updateInformation = function () {
+
+    var apiPoint = 'api/updateinfo/'+$rootScope._id;
+    alert("All this does so far is change your role to bigman");
+    $http.put(apiPoint, $scope.user).success(function (data) {
+      try {
+          $location.path('/userProfile');
+      } catch (err) {
+        alert("Something went wrong with api/updateinfo/:id");
+      }
+    });
+  };
+
 });
 
 app.controller('fileController', function ($rootScope, $scope, uploadService) {

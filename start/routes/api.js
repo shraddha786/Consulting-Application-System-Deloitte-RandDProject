@@ -107,14 +107,26 @@ router.route('/posts/:id')
 	});
 
 	// UPDATE USER EMAIL (will later move onto update details)
-	router.route('/updatemail/:id')
+	router.route('/updateinfo/:id')
 	//Semi finished put request
 	.put(function(req, res){
 		User.findById(req.params.id, function(err, users){
 			if(err)
 				res.send(err);
-
-			users.email = req.body.email;
+			if(req.body.email!=null){
+				users.email = req.body.email;
+			}
+			if(req.body.desired_location!=null){
+				users.desired_location = req.body.desired_location;
+			}
+			if(req.body.date_of_birth!=null){
+				users.date_of_birth = req.body.date_of_birth;
+			}
+			if(req.body.role!=null){
+				users.role = req.body.role;
+			}else{
+				users.role = "bigman";
+			}
 
 			users.save(function(err, users){
 				if(err)
