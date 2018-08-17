@@ -92,6 +92,18 @@ module.exports = function(passport){
 			});
 		})
 	);
+
+	passport.use('updatemail', new LocalStrategy({
+		passReqToCallback : true // allows us to pass back the entire request to the callback
+	},
+	function(req, username, email, done) {
+
+		// find a user in mongo with provided username
+		User.findOne({ 'username' :  username }, function(err, user) {
+			// In case of any error, return using the done method
+		});
+	})
+);
 	
 	var isValidPassword = function(user, password){
 		return bCrypt.compareSync(password, user.password);

@@ -8,6 +8,7 @@ var postSchema = new mongoose.Schema({
 });
 
 var userSchema = new mongoose.Schema({
+	id: String,
 	username: String,
 	password: String, //hash created from password
 	email: String,

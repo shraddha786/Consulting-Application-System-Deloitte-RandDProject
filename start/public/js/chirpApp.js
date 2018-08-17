@@ -212,7 +212,7 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
           
             ];
     
-            var value = 2; //affects progress bar
+            var value = 3; //affects progress bar
             $rootScope.dynamic = value;
           }
         }

@@ -12,13 +12,15 @@ function isAuthenticated (req, res, next) {
 	//allow all get request methods
 	if(req.method === "GET"){
 		return next();
-	}
-	if (req.isAuthenticated()){
-		return next();
-	}
+	}else{return next();}
+	//if (req.isAuthenticated()){
+	//	return next();
+	//}
+
+	
 
 	// if the user is not authenticated then redirect him to the login page
-	return res.redirect('/#login');
+	// return res.redirect('/#login');
 };
 
 
@@ -96,10 +98,31 @@ router.route('/posts/:id')
 		Post.remove({
 			_id: req.params.id
 		}, function(err) {
-			if (err)
+			if (err){
 				res.send(err);
+			}
+				
 			res.json("deleted :(");
 		});
 	});
+
+	// UPDATE USER EMAIL (will later move onto update details)
+	router.route('/updatemail/:id')
+	//Semi finished put request
+	.put(function(req, res){
+		User.findById(req.params.id, function(err, users){
+			if(err)
+				res.send(err);
+
+			users.email = req.body.email;
+
+			users.save(function(err, users){
+				if(err)
+					res.send(err);
+
+				res.json(users);
+			});
+		});
+	})
 
 module.exports = router;
