@@ -1,13 +1,21 @@
-//chirpApp.js
+// ChirpApp.js
+
 var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'ngIdle']).run(function ($rootScope, $http, $location, $cookies) {
-  $rootScope.authenticated = false;
-  $rootScope.current_user = "";
+
+  if($cookies.get('userCookie') != null){
+    $rootScope.authenticated = true;
+    $rootScope.current_user = $cookies.get('userCookie');
+
+  }
 
   $rootScope.logout = function () {
     $http.get('/auth/signout');
+    $cookies.remove("userCookie");
+    $cookies.remove("passwordCookie");
     $rootScope.authenticated = false;
     $rootScope.current_user = "";
   };
+  
   $rootScope.$on('$routeChangeStart', function(event, next, current){
     if ($location.path() == '/login' || $location.path() == '/register') {
       $rootScope.hidealert = true;
@@ -107,11 +115,9 @@ app.controller('mailController', function ($scope, $cookies, $http) {
 //Cookie functionality showcase
 app.controller('cookieBaker', function ($scope, $cookies, Idle, Keepalive, $uibModal) {
   $cookies.put('userCookie', 'set');
-  $cookies.put('authCookie', 'set');
 
   $scope.myCookieVal = $cookies.get('cookie');
   $scope.myUserCookie = $cookies.get('userCookie');
-  $scope.myAuthCookie = $cookies.get('authCookie');
 
   $scope.setCookie = function (val) {
     $cookies.put('cookie', val);
@@ -189,9 +195,11 @@ app.controller('mainController', function ($rootScope, $scope, postService) {
   };
 });
 
-app.controller('authController', function ($scope, $rootScope, $http, $location) {
+app.controller('authController', function ($scope, $rootScope, $http, $location, $cookies) {
   $scope.user = { username: '', password: '' };
   $scope.error_message = '';
+
+
 
   $scope.login = function () {
     $http.post('/auth/login', $scope.user)
@@ -207,6 +215,8 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
             $rootScope._id = data.user._id;// Fixed
 
             $location.path('/');
+            $cookies.put('userCookie', $rootScope.current_user);
+            $cookies.put('passwordCookie', $scope.user.password);
 
             $rootScope.alerts = [
               { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
@@ -238,16 +248,20 @@ app.controller('authController', function ($scope, $rootScope, $http, $location)
     });
   };
 
-  // Hardcoded function to test information update
-  $scope.updateInformation = function () {
+  $scope.updateInformation = function (val, val2, val3, val4) {
 
     var apiPoint = 'api/updateinfo/'+$rootScope._id;
-    alert("All this does so far is change your role to bigman");
+    
+    $scope.user.email = val;
+    $scope.user.desired_location = val2;
+    $scope.user.date_of_birth = val3;
+    $scope.user.role = val4;
+    
     $http.put(apiPoint, $scope.user).success(function (data) {
       try {
           $location.path('/userProfile');
       } catch (err) {
-        alert("Something went wrong with api/updateinfo/:id");
+        alert("Something went wrong with the update request. Contact staff.");
       }
     });
   };

@@ -37,6 +37,15 @@ router.route('/accounts')
 		});
 	}) 
 
+	router.route('/accounts/:id')
+	//gets account by ID
+	.get(function(req, res){
+		User.findById(req.params.id, function(err, user){
+			if(err)
+				res.send(err);
+			res.json(user);
+		});
+	})
 //Register the authentication middleware
 router.use('/posts', isAuthenticated);
 
@@ -124,8 +133,6 @@ router.route('/posts/:id')
 			}
 			if(req.body.role!=null){
 				users.role = req.body.role;
-			}else{
-				users.role = "bigman";
 			}
 
 			users.save(function(err, users){
