@@ -1,3 +1,7 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
 
 body {
   padding-top:70px;
@@ -9,6 +13,7 @@ body {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 14px;
   background: #D0D0CE;
+
 }
 
 a {
@@ -98,8 +103,31 @@ h2 {
 }
 
 a:hover {
-  color: #ffffff;
+  color: #009A44;
   text-decoration: none;
 }
 
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  height: 160px;
+  background-color: white;
+  display: block;
+}
 
+.footer-block {
+  margin: 20px 0;
+  padding-right: 53px;
+}
+
+#content {
+  padding-bottom: 15px;
+  margin-bottom: 160px;
+}
+
+#legalnotice {
+  font-size: 9px;
+  display: inline;
+}
