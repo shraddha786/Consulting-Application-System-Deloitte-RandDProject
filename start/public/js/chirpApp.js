@@ -1,5 +1,5 @@
 //chirpApp.js
-var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap']).run(function($rootScope, $http, $location, $cookies){
+var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies){
   $rootScope.authenticated = false;
   $rootScope.current_user = "";
 
@@ -172,4 +172,18 @@ app.controller('ProgressBarController', function($scope, $rootScope){
   var value = 1;
 
   $rootScope.dynamic = value;
+});
+
+
+app.controller('ScrollAnimationController', function($scope) {
+ 
+  $scope.animateElementIn = function($el) {
+    $el.removeClass('animated fadeOut');
+    $el.addClass('animated fadeIn'); //Leverages animate.css classes
+  };
+   
+  $scope.animateElementOut = function($el) {
+    $el.addClass('animated fadeOut');
+    $el.removeClass('animated fadeIn'); //Leverages animate.css classes
+  };
 });

@@ -17,6 +17,11 @@ a {
 
 h1 {
   font-size: 50px;
+  color: #009A44;
+}
+
+h2 {
+  color: #009A44;
 }
 
 .submit-btn {
@@ -91,4 +96,10 @@ h1 {
 #content {
   background-color: #BBBCBC;
 }
+
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 
