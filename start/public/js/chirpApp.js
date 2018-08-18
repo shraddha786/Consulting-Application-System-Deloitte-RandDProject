@@ -5,7 +5,22 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
   if($cookies.get('userCookie') != null){
     $rootScope.authenticated = true;
     $rootScope.current_user = $cookies.get('userCookie');
+    var persistUsername = $cookies.get('userCookie');
 
+    $rootScope.user = { username: 'Domizig', password: 'letmein' };
+
+    $http.post('/auth/login', $rootScope.user)
+      .success(function (data) {
+          if (data.user.username != "") {
+            $rootScope.authenticated = true;
+            $rootScope.current_user = data.user.username;
+            $rootScope.email = data.user.email;
+            $rootScope.desired_location = data.user.desired_location;
+            $rootScope.date_of_birth = data.user.date_of_birth;
+            $rootScope.role = data.user.role;
+            $rootScope._id = data.user._id;
+          }
+      });
   }
 
   $rootScope.logout = function () {
@@ -114,7 +129,6 @@ app.controller('mailController', function ($scope, $cookies, $http) {
 
 //Cookie functionality showcase
 app.controller('cookieBaker', function ($scope, $cookies, Idle, Keepalive, $uibModal) {
-  $cookies.put('userCookie', 'set');
 
   $scope.myCookieVal = $cookies.get('cookie');
   $scope.myUserCookie = $cookies.get('userCookie');
@@ -197,9 +211,6 @@ app.controller('mainController', function ($rootScope, $scope, postService) {
 
 app.controller('authController', function ($scope, $rootScope, $http, $location, $cookies) {
   $scope.user = { username: '', password: '' };
-  $scope.error_message = '';
-
-
 
   $scope.login = function () {
     $http.post('/auth/login', $scope.user)
@@ -216,7 +227,6 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
 
             $location.path('/');
             $cookies.put('userCookie', $rootScope.current_user);
-            $cookies.put('passwordCookie', $scope.user.password);
 
             $rootScope.alerts = [
               { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
