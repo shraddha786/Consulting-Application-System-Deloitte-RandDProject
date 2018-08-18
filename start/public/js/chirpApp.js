@@ -152,16 +152,6 @@ app.controller('AlertsController', function($scope, $rootScope){
 
   ];
 
-  /*
-  if ($rootScope.authenticated = true)
-  {
-    $rootScope.alerts = [
-      { type: 'info', msg: 'Great!' },
-  
-    ];
-  }
-  */
-
   $rootScope.closeAlert = function(index) {
     $rootScope.alerts.splice(index, 1);
   };
