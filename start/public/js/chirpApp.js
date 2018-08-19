@@ -30,7 +30,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
   $rootScope.logout = function () {
     $http.get('/auth/signout');
     $cookies.remove("userCookie");
-    $cookies.remove("passwordCookie");
+    $cookies.remove("passCookie");
     $rootScope.authenticated = false;
     $rootScope.current_user = "";
   };
@@ -255,6 +255,12 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
         if (data.user.username != "") {
           $rootScope.authenticated = true;
           $rootScope.current_user = data.user.username;
+          $rootScope.email = data.user.email;
+          $rootScope.desired_location = data.user.desired_location;
+          $rootScope.date_of_birth = data.user.date_of_birth;
+          $rootScope.role = data.user.role;
+          $rootScope._id = data.user._id;// Fixed
+          $rootScope.progress = data.user.stage;
 
           $cookies.put('userCookie', $rootScope.current_user);
           $cookies.put('passCookie', $scope.user.password);
