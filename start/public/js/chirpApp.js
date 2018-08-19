@@ -1,6 +1,6 @@
 // ChirpApp.js
-
-var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'ngIdle']).run(function ($rootScope, $http, $location, $cookies) {
+//chirpApp.js
+var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate', 'ngIdle']).run(function ($rootScope, $http, $location, $cookies) {
 
   if($cookies.get('userCookie') != null){
     $rootScope.authenticated = true;
@@ -34,7 +34,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.authenticated = false;
     $rootScope.current_user = "";
   };
-  
   $rootScope.$on('$routeChangeStart', function(event, next, current){
     if ($location.path() == '/login' || $location.path() == '/register') {
       $rootScope.hidealert = true;
@@ -266,6 +265,14 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
           $cookies.put('passCookie', $scope.user.password);
 
           $location.path('/');
+
+          $rootScope.alerts = [
+            { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+        
+          ];
+
+          var value = 2; //affects progress bar
+          $rootScope.dynamic = value;
         }
       } catch (err) {
         alert("Can't sign up this account, please use a different username and fill in all required details");
@@ -312,16 +319,6 @@ app.controller('AlertsController', function($scope, $rootScope){
 
   ];
 
-  /*
-  if ($rootScope.authenticated = true)
-  {
-    $rootScope.alerts = [
-      { type: 'info', msg: 'Great!' },
-  
-    ];
-  }
-  */
-
   $rootScope.closeAlert = function(index) {
     $rootScope.alerts.splice(index, 1);
   };
@@ -329,7 +326,21 @@ app.controller('AlertsController', function($scope, $rootScope){
 
 app.controller('ProgressBarController', function($scope, $rootScope){
   $rootScope.max = 5;
-  var value = $rootScope.progress;
+  var value = 1;
 
   $rootScope.dynamic = value;
+});
+
+
+app.controller('ScrollAnimationController', function($scope) {
+ 
+  $scope.animateElementIn = function($el) {
+    $el.removeClass('animated fadeOut');
+    $el.addClass('animated fadeIn'); //Leverages animate.css classes
+  };
+   
+  $scope.animateElementOut = function($el) {
+    $el.addClass('animated fadeOut');
+    $el.removeClass('animated fadeIn'); //Leverages animate.css classes
+  };
 });
