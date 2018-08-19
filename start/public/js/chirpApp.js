@@ -5,9 +5,9 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
   if($cookies.get('userCookie') != null){
     $rootScope.authenticated = true;
     $rootScope.current_user = $cookies.get('userCookie');
-    var persistUsername = $cookies.get('userCookie');
+    $rootScope.password = $cookies.get('passCookie');
 
-    $rootScope.user = { username: 'Domizig', password: 'letmein' };
+    $rootScope.user = { username: $rootScope.current_user, password: $rootScope.password };
 
     $http.post('/auth/login', $rootScope.user)
       .success(function (data) {
@@ -19,6 +19,10 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope.date_of_birth = data.user.date_of_birth;
             $rootScope.role = data.user.role;
             $rootScope._id = data.user._id;
+            $rootScope.progress = data.user.stage;
+
+            var value = $rootScope.progress; //affects progress bar
+            $rootScope.dynamic = value;
           }
       });
   }
@@ -224,16 +228,18 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
             $rootScope.date_of_birth = data.user.date_of_birth;
             $rootScope.role = data.user.role;
             $rootScope._id = data.user._id;// Fixed
+            $rootScope.progress = data.user.stage;
 
             $location.path('/');
             $cookies.put('userCookie', $rootScope.current_user);
+            $cookies.put('passCookie', $scope.user.password);
 
             $rootScope.alerts = [
               { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
           
             ];
     
-            var value = 3; //affects progress bar
+            var value = $rootScope.progress; //affects progress bar
             $rootScope.dynamic = value;
           }
         }
@@ -249,6 +255,9 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
         if (data.user.username != "") {
           $rootScope.authenticated = true;
           $rootScope.current_user = data.user.username;
+
+          $cookies.put('userCookie', $rootScope.current_user);
+          $cookies.put('passCookie', $scope.user.password);
 
           $location.path('/');
         }
@@ -314,7 +323,7 @@ app.controller('AlertsController', function($scope, $rootScope){
 
 app.controller('ProgressBarController', function($scope, $rootScope){
   $rootScope.max = 5;
-  var value = 1;
+  var value = $rootScope.progress;
 
   $rootScope.dynamic = value;
 });
