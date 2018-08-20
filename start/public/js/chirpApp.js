@@ -35,7 +35,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.current_user = "";
   };
   $rootScope.$on('$routeChangeStart', function(event, next, current){
-    if ($location.path() == '/login' || $location.path() == '/register') {
+    if ($location.path() == '/login' || $location.path() == '/register' ||  $location.path() == '/logout') {
       $rootScope.hidealert = true;
       $rootScope.hideprog = true;
     }
