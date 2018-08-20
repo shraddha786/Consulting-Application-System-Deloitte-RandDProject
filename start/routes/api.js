@@ -134,6 +134,7 @@ router.route('/posts/:id')
 			if(req.body.role!=null){
 				users.role = req.body.role;
 			}
+			users.stage = 3;
 
 			users.save(function(err, users){
 				if(err)

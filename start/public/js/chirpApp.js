@@ -24,6 +24,22 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             var value = $rootScope.progress; //affects progress bar
             $rootScope.dynamic = value;
           }
+          alert($rootScope.progress);
+          if($rootScope.progress == 2){
+            $location.path('/userProfile');
+
+            $rootScope.alerts = [
+              { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+        
+            ];
+          }else if($rootScope.progress == 3){
+            $location.path('/upload');
+
+            $rootScope.alerts = [
+              { type: 'info', msg: 'To finilize your information component, please upload your CV' }, //affects alert message box
+        
+            ];
+          }
       });
   }
 
@@ -229,14 +245,17 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
             $rootScope._id = data.user._id;// Fixed
             $rootScope.progress = data.user.stage;
 
-            $location.path('/');
             $cookies.put('userCookie', $rootScope.current_user);
             $cookies.put('passCookie', $scope.user.password);
 
-            $rootScope.alerts = [
-              { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+            if($rootScope.progress == 2){
+              $location.path('/userProfile');
+
+              $rootScope.alerts = [
+                { type: 'info', msg: 'To finilize your information component, please upload your CV' }, //affects alert message box
           
-            ];
+              ];
+            }
     
             var value = $rootScope.progress;
             $rootScope.dynamic = value;
@@ -266,12 +285,11 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
 
           $location.path('/');
 
-          if($rootScope.progress == 2){
-            $rootScope.alerts = [
-              { type: 'info', msg: 'You are in stage two' }, //affects alert message box
-        
-            ];
-          }
+          $location.path('/userProfile');
+
+          $rootScope.alerts = [
+            { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+          ];
 
           var value = $rootScope.progress;
           $rootScope.dynamic = value;
@@ -293,7 +311,12 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
     
     $http.put(apiPoint, $scope.user).success(function (data) {
       try {
-          $location.path('/userProfile');
+          $location.path('/upload');
+
+          $rootScope.alerts = [
+            { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+        
+          ];
       } catch (err) {
         alert("Something went wrong with the update request. Contact staff.");
       }
