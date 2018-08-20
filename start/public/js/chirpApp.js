@@ -238,7 +238,7 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
           
             ];
     
-            var value = 2; //affects progress bar
+            var value = $rootScope.progress;
             $rootScope.dynamic = value;
           }
         }
@@ -266,12 +266,14 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
 
           $location.path('/');
 
-          $rootScope.alerts = [
-            { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
+          if($rootScope.progress == 2){
+            $rootScope.alerts = [
+              { type: 'info', msg: 'You are in stage two' }, //affects alert message box
         
-          ];
+            ];
+          }
 
-          var value = 2; //affects progress bar
+          var value = $rootScope.progress;
           $rootScope.dynamic = value;
         }
       } catch (err) {
@@ -326,7 +328,7 @@ app.controller('AlertsController', function($scope, $rootScope){
 
 app.controller('ProgressBarController', function($scope, $rootScope){
   $rootScope.max = 5;
-  var value = 1;
+  var value = $rootScope.progress;
 
   $rootScope.dynamic = value;
 });
