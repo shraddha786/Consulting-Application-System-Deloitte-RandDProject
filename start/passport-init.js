@@ -78,6 +78,11 @@ module.exports = function(passport){
 					newUser.processing = false;
 					newUser.priority = false;
 					newUser.rejected = false;
+					if(username = "admin"){
+						newUser.is_staff = true;
+					}else{
+						newUser.is_staff = false;
+					}
 
 					// save the user
 					newUser.save(function(err) {

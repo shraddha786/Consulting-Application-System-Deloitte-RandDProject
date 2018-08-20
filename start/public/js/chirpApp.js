@@ -20,12 +20,19 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope.role = data.user.role;
             $rootScope._id = data.user._id;
             $rootScope.progress = data.user.stage;
+            $rootScope.is_staff = data.user.is_staff;
 
             var value = $rootScope.progress; //affects progress bar
             $rootScope.dynamic = value;
           }
-          alert($rootScope.progress);
-          if($rootScope.progress == 2){
+          if ($rootScope.is_staff){
+            $location.path('/ismDashboard');
+            
+            $rootScope.alerts = [
+              { type: 'info', msg: 'Work hard you are being paid by the hour bozzo' }, //affects alert message box
+        
+            ];
+          }else if($rootScope.progress == 2){
             $location.path('/userProfile');
 
             $rootScope.alerts = [
@@ -244,9 +251,14 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
             $rootScope.role = data.user.role;
             $rootScope._id = data.user._id;// Fixed
             $rootScope.progress = data.user.stage;
+            $rootScope.is_staff = data.user.is_staff;
 
             $cookies.put('userCookie', $rootScope.current_user);
             $cookies.put('passCookie', $scope.user.password);
+
+            if ($rootScope.is_staff){
+              $location.path('/ismDashboard');
+            }
 
             if($rootScope.progress == 2){
               $location.path('/userProfile');
@@ -279,9 +291,14 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
           $rootScope.role = data.user.role;
           $rootScope._id = data.user._id;// Fixed
           $rootScope.progress = data.user.stage;
+          $rootScope.is_staff = data.user.is_staff;
 
           $cookies.put('userCookie', $rootScope.current_user);
           $cookies.put('passCookie', $scope.user.password);
+
+          if ($rootScope.is_staff){
+            $location.path('/ismDashboard');
+          }
 
           $location.path('/');
 
