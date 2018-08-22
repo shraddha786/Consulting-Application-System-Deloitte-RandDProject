@@ -10,7 +10,25 @@
         <br><br>
         <input ng-click="associate()" type="submit" value="Submit" class="btn btn-primary btn-block">
       </form>
-      <div class="post" ng-repeat="file in files" ng-class-odd="'odd'" ng-class-even="'even'">
+
+      <div class="post" ng-class-odd="'odd'" ng-class-even="'even'">
+        <hr>
+        <i class="glyphicon glyphicon-book"></i> {{filename}}
+        <br>
+        <i>File ID: </i> add some fileID stuff{{fileID}}
+        <div class="row" style="margin-top: 10px" >
+          <div class="col-md-6">
+            <a href="upload/files/{{fileID}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i> Download</a>
+          </div>
+          <div class="col-md-6">
+            <form method="DELETE" ng-submit="delete()">
+              <button class="btn btn-danger btn-block  col-md-6"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="post" ng-repeat="file in files" ng-class-odd="'odd'" ng-class-even="'even'">
         <hr>
         <i class="glyphicon glyphicon-book"></i> {{file.filename}}
         <br>
@@ -25,7 +43,7 @@
             </form>
           </div>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>

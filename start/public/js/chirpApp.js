@@ -21,6 +21,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope._id = data.user._id;
             $rootScope.progress = data.user.stage;
             $rootScope.is_staff = data.user.is_staff;
+            $rootScope.filename = data.user.filename;
 
             var value = $rootScope.progress; //affects progress bar
             $rootScope.dynamic = value;
