@@ -136,8 +136,19 @@ app.factory('accountService', function($resource) {
   return $resource('/api/accounts/:username');
 });
 
-app.controller('ismController', function ($rootScope, $scope, accountService) {
-  
+app.controller('ismController', function ($rootScope, $scope, accountService, $cookies, $http) {
+
+  if($cookies.get('filePersist') != null){
+    $scope.user.filename = $cookies.get('filePersist');
+
+    var apiPoint = 'api/updateinfo/'+$cookies.get('tempID');
+    $http.put(apiPoint, $scope.user).success(function (data) {
+      alert("File persistance API call successful.");
+    });
+    $cookies.remove("filePersist");
+    $cookies.remove("tempID");
+  }
+
   $scope.users = accountService.query();
 
 });
@@ -215,10 +226,6 @@ app.controller('cookieBaker', function ($scope, $cookies, Idle, Keepalive, $uibM
   IdleProvider.idle(5);
   IdleProvider.timeout(5);
   KeepaliveProvider.interval(10);
-});
-
-app.controller('fileController', function ($scope, $cookies) {
-  $cookies.put('cookie', 'logout cookie');
 });
 
 app.controller('mainController', function ($rootScope, $scope, postService) {
@@ -342,18 +349,6 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
 
 });
 
-app.controller('fileController', function ($rootScope, $scope, uploadService) {
-  $scope.delete = function () {
-    var id = prompt("Please confirm the ID of the file:", "");
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "http://localhost:3000/upload/files/" + id, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send();
-  }
-
-  $scope.files = uploadService.query();
-});
-
 app.controller('AlertsController', function($scope, $rootScope){
   $rootScope.alerts = [
     { type: 'info', msg: 'Welcome to Deloitte Firestarter, our Intern and Graduate program for the Consulting service line.' +
@@ -385,4 +380,31 @@ app.controller('ScrollAnimationController', function($scope) {
     $el.addClass('animated fadeOut');
     $el.removeClass('animated fadeIn'); //Leverages animate.css classes
   };
+});
+
+app.controller('fileController', function ($rootScope, $scope, uploadService, $cookies) {
+
+  $scope.delete = function () {
+    var id = prompt("Please confirm the ID of the file:", "");
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("DELETE", "http://localhost:3000/upload/files/" + id, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send();
+  }
+
+  $scope.associate = function() {
+    var fullPath = document.getElementById('file').value;
+    if (fullPath) {
+      var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+      var filename = fullPath.substring(startIndex);
+      if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+          filename = filename.substring(1);
+      }
+
+      $cookies.put('tempID', $rootScope._id);
+      $cookies.put('filePersist', filename);
+    }
+  }
+  
+  $scope.files = uploadService.query();
 });

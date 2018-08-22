@@ -134,6 +134,11 @@ router.route('/posts/:id')
 			if(req.body.role!=null){
 				users.role = req.body.role;
 			}
+			if(req.body.filename!=null){
+				users.filename = req.body.filename;
+			}else{
+				users.filename = "";
+			}
 			users.stage = 3;
 
 			users.save(function(err, users){

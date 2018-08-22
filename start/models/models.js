@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
 	processing: Boolean,
 	priority: Boolean,
 	rejected: Boolean,
-	is_staff: Boolean
+	is_staff: Boolean,
+	filename: String
 })
 
 
