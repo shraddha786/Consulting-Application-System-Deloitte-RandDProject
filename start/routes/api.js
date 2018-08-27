@@ -136,10 +136,10 @@ router.route('/posts/:id')
 			}
 			if(req.body.filename!=null){
 				users.filename = req.body.filename;
-			}else{
-				users.filename = "";
 			}
-			users.stage = 3;
+			if(req.body.stage!=null){
+				users.stage = req.body.stage;
+			}
 
 			users.save(function(err, users){
 				if(err)

@@ -19,7 +19,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope.date_of_birth = data.user.date_of_birth;
             $rootScope.role = data.user.role;
             $rootScope._id = data.user._id;
-            $rootScope.progress = data.user.stage;
+            //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
             $rootScope.is_staff = data.user.is_staff;
             $rootScope.filename = data.user.filename;
 
@@ -38,13 +38,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
 
             $rootScope.alerts = [
               { type: 'info', msg: 'Hello! Please fill out the information below' }, //affects alert message box
-        
-            ];
-          }else if($rootScope.progress == 3){
-            $location.path('/upload');
-
-            $rootScope.alerts = [
-              { type: 'info', msg: 'To finilize your information component, please upload your CV' }, //affects alert message box
         
             ];
           }
@@ -101,7 +94,7 @@ app.config(function ($routeProvider) {
     //the video Interview display
     .when('/videoInterview', {
       templateUrl: 'videoInterview.html',
-      controller: 'mainController'
+      controller: 'videoController'
     })
     //the user Profile display
     .when('/userProfile', {
@@ -244,6 +237,8 @@ app.controller('mainController', function ($rootScope, $scope, postService) {
 });
 
 app.controller('authController', function ($scope, $rootScope, $http, $location, $cookies) {
+  $rootScope.progress = 2;
+  
   $scope.user = { username: '', password: '' };
 
   $scope.login = function () {
@@ -333,6 +328,7 @@ app.controller('authController', function ($scope, $rootScope, $http, $location,
     $scope.user.desired_location = val2;
     $scope.user.date_of_birth = val3;
     $scope.user.role = val4;
+    $scope.user.stage = 3;
     
     $http.put(apiPoint, $scope.user).success(function (data) {
       try {
@@ -385,6 +381,7 @@ app.controller('ScrollAnimationController', function($scope) {
 
 app.controller('fileController', function ($rootScope, $scope, uploadService, $cookies, $http) {
 
+  $rootScope.progress = 3;
   if($cookies.get('filePersist')){
     $scope.user.filename = $cookies.get('filePersist');
 
@@ -407,12 +404,13 @@ app.controller('fileController', function ($rootScope, $scope, uploadService, $c
   $scope.associate = function() {
     var fullPath = document.getElementById('file').value;
     if (fullPath) {
+      try{
       var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
       var filename = fullPath.substring(startIndex);
       if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
           filename = filename.substring(1);
       }
-
+    }catch {alert("difficult");}
       $cookies.put('tempID', $rootScope._id);
       $cookies.put('filePersist', filename);
     }
@@ -420,3 +418,13 @@ app.controller('fileController', function ($rootScope, $scope, uploadService, $c
   
   $scope.files = uploadService.query();
 });
+
+
+app.controller('videoController', function ($rootScope, $scope, $cookies, $http) {
+
+  $rootScope.progress = 4;
+
+  
+});
+
+

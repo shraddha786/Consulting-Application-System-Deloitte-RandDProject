@@ -71,7 +71,7 @@ router.get('/', (req, res) => {
 // @route POST /upload
 // @desc  Uploads file to DB
 router.post('/', upload.single('file'), (req, res) => {
-  res.redirect('/#/upload');
+  res.redirect('/#/videoInterview');
 });
 
 // @route GET /files
