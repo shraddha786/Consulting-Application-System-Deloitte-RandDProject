@@ -52,7 +52,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.current_user = "";
   };
   $rootScope.$on('$routeChangeStart', function(event, next, current){
-    if ($location.path() == '/login' || $location.path() == '/register' ||  $location.path() == '/logout'||  $location.path() == '/complete') {
+    if ($location.path() == '/login' || $location.path() == '/ismDashboard'|| $location.path() == '/register' ||  $location.path() == '/logout'||  $location.path() == '/complete') {
       $rootScope.hidealert = true;
       $rootScope.hideprog = true;
     }
@@ -147,6 +147,12 @@ app.controller('ismController', function ($rootScope, $scope, accountService, $c
     $cookies.remove("tempID");
   }
 
+  $scope.reject = function (val) {
+    if(confirm("Are you sure you want to reject "+val+"?", "Yes I am sure")){
+      prompt("Is there anything you would like to add?", "leave default rejection letter or add more here");
+      alert("THIS IS WHERE ARCHIVE USER WOULD BE CALLED AND A PAGE REFRESH WOULD HAPPEN");
+    }
+  }
   $scope.users = accountService.query();
 
 });
