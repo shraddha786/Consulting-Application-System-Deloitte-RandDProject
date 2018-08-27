@@ -79,7 +79,7 @@ module.exports = function(passport){
 					newUser.priority = false;
 					newUser.rejected = false;
 					newUser.filename = null;
-					if(username = "admin"){
+					if(username == "admin"){
 						newUser.is_staff = true;
 					}else{
 						newUser.is_staff = false;
