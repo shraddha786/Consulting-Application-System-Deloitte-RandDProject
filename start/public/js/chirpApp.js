@@ -139,7 +139,7 @@ app.factory('accountService', function($resource) {
 
 app.controller('ismController', function ($rootScope, $scope, accountService, $cookies, $http) {
 
-  if($cookies.get('filePersist') != null){
+  if($cookies.get('filePersist')){
     $scope.user.filename = $cookies.get('filePersist');
 
     var apiPoint = 'api/updateinfo/'+$cookies.get('tempID');
@@ -383,7 +383,18 @@ app.controller('ScrollAnimationController', function($scope) {
   };
 });
 
-app.controller('fileController', function ($rootScope, $scope, uploadService, $cookies) {
+app.controller('fileController', function ($rootScope, $scope, uploadService, $cookies, $http) {
+
+  if($cookies.get('filePersist')){
+    $scope.user.filename = $cookies.get('filePersist');
+
+    var apiPoint = 'api/updateinfo/'+$cookies.get('tempID');
+    $http.put(apiPoint, $scope.user).success(function (data) {
+      alert("File persistance API call successful.");
+    });
+    $cookies.remove("filePersist");
+    $cookies.remove("tempID");
+  }
 
   $scope.delete = function () {
     var id = prompt("Please confirm the ID of the file:", "");
