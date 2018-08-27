@@ -52,7 +52,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     $rootScope.current_user = "";
   };
   $rootScope.$on('$routeChangeStart', function(event, next, current){
-    if ($location.path() == '/login' || $location.path() == '/register' ||  $location.path() == '/logout') {
+    if ($location.path() == '/login' || $location.path() == '/register' ||  $location.path() == '/logout'||  $location.path() == '/complete') {
       $rootScope.hidealert = true;
       $rootScope.hideprog = true;
     }
@@ -70,6 +70,10 @@ app.config(function ($routeProvider) {
     .when('/', {
       templateUrl: 'main.html',
       controller: 'mainController'
+    })
+    .when('/complete', {
+      templateUrl: 'completedApplication.html',
+      controller: 'completeController'
     })
     //the login display
     .when('/login', {
@@ -238,7 +242,7 @@ app.controller('mainController', function ($rootScope, $scope, postService) {
 
 app.controller('authController', function ($scope, $rootScope, $http, $location, $cookies) {
   $rootScope.progress = 2;
-  
+
   $scope.user = { username: '', password: '' };
 
   $scope.login = function () {
@@ -424,7 +428,16 @@ app.controller('videoController', function ($rootScope, $scope, $cookies, $http)
 
   $rootScope.progress = 4;
 
-  
+  $scope.completed = function() {
+    $location.path('/complete');
+  }
+
+});
+
+app.controller('completeController', function ($rootScope, $scope, $cookies, $http) {
+
+  $rootScope.progress = 5;
+
 });
 
 
