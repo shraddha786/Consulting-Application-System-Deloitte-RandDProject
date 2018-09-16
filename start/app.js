@@ -18,7 +18,8 @@ var app = express();
 
 var api_key = '4a94b9ddc7e28006170e29b9e7ab5a0b-8889127d-d9d89be0';
 var domain = 'sandboxdc705a9195684b13948ef2946002cf14.mailgun.org';
-var mailgun = require('mailgun-js')({
+var mailgun = require('mailgun-js')(
+{
     apiKey: api_key,
     domain: domain
 });
@@ -32,7 +33,8 @@ var mailgun = require('mailgun-js')({
       to: req.params.mail ((The money shot, see above req call :mail))
  */
 //Also remember to use the routes folder
-app.get('/mailgun', function (req, res, next) {
+app.get('/mailgun', function(req, res, next)
+{
 
     var data = {
         from: 'Employment <maxfrancis212@gmail.com>',
@@ -41,9 +43,10 @@ app.get('/mailgun', function (req, res, next) {
         text: 'You smell like Camembert go away!, Deloitte Recruiting'
     };
 
-    mailgun.messages().send(data, function (error, body) {});
+    mailgun.messages().send(data, function(error, body) {});
 
-    res.send({
+    res.send(
+    {
         state: 'success'
     });
 });
@@ -55,11 +58,13 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
-app.use(session({
+app.use(session(
+{
     secret: 'keyboard cat'
 }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.urlencoded(
+{
     extended: false
 }));
 app.use(cookieParser());
@@ -73,7 +78,8 @@ app.use('/api', api);
 app.use('/upload', upload);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next)
+{
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -87,10 +93,13 @@ initPassport(passport);
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+if (app.get('env') === 'development')
+{
+    app.use(function(err, req, res, next)
+    {
         res.status(err.status || 500);
-        res.render('error', {
+        res.render('error',
+        {
             message: err.message,
             error: err
         });
@@ -99,11 +108,14 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next)
+{
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('error',
+    {
         message: err.message,
-        error: {}
+        error:
+        {}
     });
 });
 
