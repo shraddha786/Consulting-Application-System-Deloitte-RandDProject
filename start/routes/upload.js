@@ -38,7 +38,7 @@ const storage = new GridFsStorage({
         if (err) {
           return reject(err);
         }
-        const filename = file.originalname;//buf.toString('hex') + path.extname(file.originalname);
+        const filename = file.originalname; //buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads'
@@ -48,7 +48,9 @@ const storage = new GridFsStorage({
     });
   }
 });
-const upload = multer({ storage });
+const upload = multer({
+  storage
+});
 
 // @route GET /
 // @desc Loads form
@@ -57,13 +59,15 @@ router.get('/', (req, res) => {
 
     // Check if files
     if (!files || files.length === 0) {
-      res.render('upload', { files: false });
+      res.render('upload', {
+        files: false
+      });
     } else {
       files.map(file => {
         file.id = file._id;
       });
-      
-      return res.send(200,files);
+
+      return res.send(200, files);
     }
   });
 });
@@ -93,13 +97,15 @@ router.get('/files', (req, res) => {
 // @route GET /files/:filename
 // @desc  Display single file object
 router.get('/files/:filename', (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+  gfs.files.findOne({
+    filename: req.params.filename
+  }, (err, file) => {
     // Check if file
     if (!file || file.length === 0) {
       return res.status(404).json({
         err: 'No file exists'
       });
-    }else{
+    } else {
 
       // File exists
       const readstream = gfs.createReadStream(file.filename);
@@ -111,9 +117,14 @@ router.get('/files/:filename', (req, res) => {
 // @route DELETE /files/:id
 // @desc  Delete file
 router.delete('/files/:id', (req, res) => {
-  gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+  gfs.remove({
+    _id: req.params.id,
+    root: 'uploads'
+  }, (err, gridStore) => {
     if (err) {
-      return res.status(404).json({ err: err });
+      return res.status(404).json({
+        err: err
+      });
     }
 
     res.redirect('/#/upload');

@@ -1,17 +1,17 @@
 <div>
-    <br><br><br><br>
-    {{ myCookieVal }}
-    <input type = "text" ng-model="cookieVal">
-    <button ng-click="setCookie(cookieVal)">Update Cookie Value!</button>
+  <br><br><br><br>
+  {{ myCookieVal }}
+  <input type="text" ng-model="cookieVal">
+  <button ng-click="setCookie(cookieVal)">Update Cookie Value!</button>
 </div>
 
-    <p>
-      <button type="button" class="btn btn-success" data-ng-hide="started" data-ng-click="start()">Start Demo</button>
-      <button type="button" class="btn btn-danger" data-ng-show="started" data-ng-click="stop()">Stop Demo</button>
-    </p>
-  
-  <script type="text/ng-template" id="warning-dialog.html">
-    <div class="modal-header">
+<p>
+  <button type="button" class="btn btn-success" data-ng-hide="started" data-ng-click="start()">Start Demo</button>
+  <button type="button" class="btn btn-danger" data-ng-show="started" data-ng-click="stop()">Stop Demo</button>
+</p>
+
+<script type="text/ng-template" id="warning-dialog.html">
+  <div class="modal-header">
      <h3>You're Idle. Do Something!</h3>
     </div>
     <div idle-countdown="countdown" ng-init="countdown=5" class="modal-body">
@@ -19,8 +19,8 @@
     </div>
   
   </script>
-  <script type="text/ng-template" id="timedout-dialog.html">
-    <div class="modal-header">
+<script type="text/ng-template" id="timedout-dialog.html">
+  <div class="modal-header">
      <h3>You've Timed Out!</h3>
     </div>
     <div class="modal-body">

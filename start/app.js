@@ -12,13 +12,16 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var upload = require('./routes/upload');
 var authenticate = require('./routes/authenticate')(passport);
-var mongoose = require('mongoose');                         //add for Mongo support
-mongoose.connect('mongodb://localhost/test-chirp');              //connect to Mongo
+var mongoose = require('mongoose'); //add for Mongo support
+mongoose.connect('mongodb://localhost/test-chirp'); //connect to Mongo
 var app = express();
 
 var api_key = '4a94b9ddc7e28006170e29b9e7ab5a0b-8889127d-d9d89be0';
 var domain = 'sandboxdc705a9195684b13948ef2946002cf14.mailgun.org';
-var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+var mailgun = require('mailgun-js')({
+    apiKey: api_key,
+    domain: domain
+});
 
 //App request to send a message to max, will later make a call more like:
 /**
@@ -29,18 +32,20 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
       to: req.params.mail ((The money shot, see above req call :mail))
  */
 //Also remember to use the routes folder
-app.get('/mailgun', function(req, res, next) {
+app.get('/mailgun', function (req, res, next) {
 
     var data = {
         from: 'Employment <maxfrancis212@gmail.com>',
         to: 'maxfrancis212@gmail.com',
         subject: 'Rejected',
         text: 'You smell like Camembert go away!, Deloitte Recruiting'
-      };
-       
-      mailgun.messages().send(data, function (error, body) {});
+    };
 
-	res.send({state: 'success'});
+    mailgun.messages().send(data, function (error, body) {});
+
+    res.send({
+        state: 'success'
+    });
 });
 
 // view engine setup
@@ -51,10 +56,12 @@ app.set('view engine', 'ejs');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(session({
-  secret: 'keyboard cat'
+    secret: 'keyboard cat'
 }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
@@ -66,7 +73,7 @@ app.use('/api', api);
 app.use('/upload', upload);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -81,7 +88,7 @@ initPassport(passport);
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -92,7 +99,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
