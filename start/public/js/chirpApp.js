@@ -134,8 +134,9 @@ app.factory('accountService', function($resource) {
   return $resource('/api/accounts/:username');
 });
 
-app.controller('ismController', function ($rootScope, $scope, accountService, $cookies, $http) {
+app.controller('ismController', function ($rootScope, $scope, accountService, $cookies, $http, uploadService) {
 
+  $scope.files = uploadService.query();
   if($cookies.get('filePersist')){
     $scope.user.filename = $cookies.get('filePersist');
 

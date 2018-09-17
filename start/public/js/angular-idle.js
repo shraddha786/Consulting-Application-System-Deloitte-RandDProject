@@ -1,9 +1,4 @@
-/*** Directives and services for responding to idle users in AngularJS
-* @author Mike Grabski <me@mikegrabski.com>
-* @version v1.3.2
-* @link https://github.com/HackedByChinese/ng-idle.git
-* @license MIT
-*/
+// Third party js functionality by Mike Grabski under the MIT license (https://github.com/HackedByChinese/ng-idle.git)
 (function(window, angular, undefined) {
     'use strict';
     angular.module('ngIdle', ['ngIdle.keepalive', 'ngIdle.idle', 'ngIdle.countdown', 'ngIdle.title', 'ngIdle.localStorage']);
