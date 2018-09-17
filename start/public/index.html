@@ -67,41 +67,48 @@
           </script>
           <div uib-alert ng-repeat="alert in alerts" style="background-color: #53565A; color: white" ng-class="'alert-' + (alert.type || 'info')"
             close="closeAlert($index)">{{alert.msg}}</div>
-          </div>
-          <div ng-controller="ProgressBarController" ng-hide="hideprog" id="progressBarID">
-            <uib-progressbar max="max" value="dynamic">
-              <div class="progress">
-                <div class="progress-bar-custom">
-                  <span style="color:white; white-space:nowrap;">Step {{dynamic}}</span>
-                </div>
-              </div>
-            </uib-progressbar>
-          </div>
-
-          <div ng-view></div>
         </div>
+        <div ng-controller="ProgressBarController" ng-hide="hideprog" id="progressBarID">
+          <uib-progressbar max="max" value="dynamic">
+            <div class="progress">
+              <div class="progress-bar-custom">
+                <span style="color:white; white-space:nowrap;">Step {{dynamic}}</span>
+              </div>
+            </div>
+          </uib-progressbar>
+        </div>
+
+        <div ng-view></div>
       </div>
+    </div>
+
+  </div>
+  <!--footer-->
+  <footer>
+    <div class="container">
+      <br>
+      <p><strong>Have any questions or need help with your application? Please email recruitment@deloittenz.co.nz</strong></p>
+      <p id="legalnotice">© 2018. See</p><a id="legalnotice" href="https://www2.deloitte.com/nz/en/legal/legal.html">
+        Terms of Use </a>
+      <p id="legalnotice">for more information.</p>
+      <p></p>
+      <p id="legalnotice">Deloitte refers to one or more of Deloitte Touche Tohmatsu Limited, a UK private company
+        limited by guarantee (“DTTL”),
+        its network of member firms, and their related entities. DTTL and each of its member firms are legally separate
+        and independent entities.
+        DTTL (also referred to as “Deloitte Global”) does not provide services to clients. Please see
+        www.deloitte.com/about to learn more about our global network of member firms.</p>
+      <p></p>
+      <a class="footer-block" href="https://www2.deloitte.com/nz/en.html">Deloitte New Zealand Main Website</a>
+      <a class="footer-block" href="https://jobs2.deloitte.com/nz/en/?icid=bottom_job-search">Deloitte New Zealand
+        Careers Website</a>
+      <a class="footer-block" href="http://www2.deloitte.com/nz/en/legal/about-deloitte.html">About Deloitte</a>
+      <a class="footer-block" href="http://careers.deloitte.co.nz/our-culture/">Our Culture</a>
+      <a class="footer-block" href="https://www2.deloitte.com/global/en/pages/about-deloitte/topics/global-diversity-deloitte-is-diversity.html">Diversity
+        & Inclusion</a>
 
     </div>
-        <!--footer-->
-        <footer>
-            <div class="container">
-              <br>
-              <p><strong>Have any questions or need help with your application? Please email recruitment@deloittenz.co.nz</strong></p>
-              <p id="legalnotice">© 2018. See</p><a id="legalnotice" href="https://www2.deloitte.com/nz/en/legal/legal.html"> Terms of Use </a><p id="legalnotice">for more information.</p>
-              <p></p>
-              <p id="legalnotice">Deloitte refers to one or more of Deloitte Touche Tohmatsu Limited, a UK private company limited by guarantee (“DTTL”), 
-                its network of member firms, and their related entities. DTTL and each of its member firms are legally separate and independent entities. 
-                DTTL (also referred to as “Deloitte Global”) does not provide services to clients. Please see www.deloitte.com/about to learn more about our global network of member firms.</p>
-                <p></p>
-                <a class="footer-block" href="https://www2.deloitte.com/nz/en.html">Deloitte New Zealand Main Website</a> 
-                <a class="footer-block" href="https://jobs2.deloitte.com/nz/en/?icid=bottom_job-search">Deloitte New Zealand Careers Website</a> 
-                <a class="footer-block" href="http://www2.deloitte.com/nz/en/legal/about-deloitte.html">About Deloitte</a> 
-                <a class="footer-block" href="http://careers.deloitte.co.nz/our-culture/">Our Culture</a> 
-                <a class="footer-block" href="https://www2.deloitte.com/global/en/pages/about-deloitte/topics/global-diversity-deloitte-is-diversity.html">Diversity & Inclusion</a> 
-  
-              </div>
-          </footer>
+  </footer>
 </body>
 
 </html>

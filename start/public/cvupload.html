@@ -16,9 +16,10 @@
         <i class="glyphicon glyphicon-book"></i> {{filename}}
         <br>
         <i>File ID: </i> add some fileID stuff{{fileID}}
-        <div class="row" style="margin-top: 10px" >
+        <div class="row" style="margin-top: 10px">
           <div class="col-md-6">
-            <a href="upload/files/{{fileID}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i> Download</a>
+            <a href="upload/files/{{fileID}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i>
+              Download</a>
           </div>
           <div class="col-md-6">
             <form method="DELETE" ng-submit="delete()">

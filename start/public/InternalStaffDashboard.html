@@ -1,4 +1,5 @@
 <div class="clearfix">
+<<<<<<< HEAD
     <H4 >Applicants</p>
         
 
@@ -31,4 +32,18 @@
         </div>
       </div>
 
+=======
+    <H4>Applicants</p>
+        <div class="post" ng-repeat="user in users | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'">
+            <tr>
+                <td>NAME: {{user.username}}</td>
+                <td>EMAIL: {{user.email}}</td>
+                <td>STAGE: {{user.stage}}</td>
+                <td>STAGE: {{user.desired_location}}</td>
+                <td>ROLE: {{user.role}}</td>
+                <td><button>Hire</button></td>
+                <td><button ng-click="reject(user.username)">Reject</button></td>
+            </tr>
+        </div>
+>>>>>>> 8315513b6cc6d70aa34939872cd2e785c40cab85
 </div>
