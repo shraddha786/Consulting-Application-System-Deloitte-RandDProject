@@ -166,7 +166,7 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
         {
-            alert("File persistance API call successful.");
+
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
@@ -254,12 +254,15 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
 
-                        if ($rootScope.is_staff)
+                        var value = $rootScope.progress;
+                        $rootScope.dynamic = value;
+
+                        if (true)
                         {
                             $location.path('/ismDashboard');
                         }
 
-                        if ($rootScope.progress == 2)
+                        else if ($rootScope.progress == 2)
                         {
                             $location.path('/userProfile');
 
@@ -417,8 +420,8 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
 
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
-        {
-            alert("File persistance API call successful.");
+        { 
+
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
