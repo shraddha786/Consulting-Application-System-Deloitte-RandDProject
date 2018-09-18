@@ -1,6 +1,6 @@
 // ChirpApp.js
 //chirpApp.js
-var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate', 'ngIdle']).run(function($rootScope, $http, $location, $cookies)
+var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies)
 {
 
     if ($cookies.get('userCookie') != null)
@@ -115,12 +115,6 @@ app.config(function($routeProvider)
             templateUrl: 'logout.html',
             controller: 'chirpApp'
         })
-        //the Cookie showcaser
-        .when('/cookieBaker',
-        {
-            templateUrl: 'cookieBaker.html',
-            controller: 'cookieBaker'
-        })
         //the video Interview display
         .when('/videoInterview',
         {
@@ -151,12 +145,7 @@ app.config(function($routeProvider)
             templateUrl: 'cvupload.html',
             controller: 'fileController'
         });
-}, ['KeepaliveProvider', 'IdleProvider', function(KeepaliveProvider, IdleProvider)
-{
-    IdleProvider.idle(5);
-    IdleProvider.timeout(5);
-    KeepaliveProvider.interval(10);
-}]);
+});
 
 app.factory('postService', function($resource)
 {
@@ -170,7 +159,6 @@ app.factory('accountService', function($resource)
 
 app.controller('ismController', function($rootScope, $scope, accountService, $cookies, $http)
 {
-
     if ($cookies.get('filePersist'))
     {
         $scope.user.filename = $cookies.get('filePersist');
@@ -178,7 +166,7 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
         {
-            alert("File persistance API call successful.");
+
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
@@ -208,83 +196,6 @@ app.controller('mailController', function($scope, $cookies, $http)
     {
         $http.get('/mailgun');
     }
-});
-
-//Cookie functionality showcase
-app.controller('cookieBaker', function($scope, $cookies, Idle, Keepalive, $uibModal)
-{
-
-    $scope.myCookieVal = $cookies.get('cookie');
-    $scope.myUserCookie = $cookies.get('userCookie');
-
-    $scope.setCookie = function(val)
-    {
-        $cookies.put('cookie', val);
-    }
-
-    $scope.started = false;
-
-    function closeModals()
-    {
-        if ($scope.warning)
-        {
-            $scope.warning.close();
-            $scope.warning = null;
-        }
-
-        if ($scope.timedout)
-        {
-            $scope.timedout.close();
-            $scope.timedout = null;
-        }
-    }
-
-    $scope.$on('IdleStart', function()
-    {
-        closeModals();
-
-        $scope.warning = $uibModal.open(
-        {
-            templateUrl: 'warning-dialog.html',
-            windowClass: 'modal-danger'
-        });
-    });
-
-    $scope.$on('IdleEnd', function()
-    {
-        closeModals();
-    });
-
-    $scope.$on('IdleTimeout', function()
-    {
-        closeModals();
-        $scope.timedout = $uibModal.open(
-        {
-            templateUrl: 'timedout-dialog.html',
-            windowClass: 'modal-danger'
-        });
-    });
-
-    $scope.start = function()
-    {
-        closeModals();
-        Idle.watch();
-        $scope.started = true;
-    };
-
-    $scope.stop = function()
-    {
-        closeModals();
-        Idle.unwatch();
-        $scope.started = false;
-
-    };
-
-}).config(function(IdleProvider, KeepaliveProvider)
-{
-    IdleProvider.idle(5);
-    IdleProvider.timeout(5);
-    KeepaliveProvider.interval(10);
 });
 
 app.controller('mainController', function($rootScope, $scope, postService)
@@ -343,12 +254,15 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
 
-                        if ($rootScope.is_staff)
+                        var value = $rootScope.progress;
+                        $rootScope.dynamic = value;
+
+                        if (true)
                         {
                             $location.path('/ismDashboard');
                         }
 
-                        if ($rootScope.progress == 2)
+                        else if ($rootScope.progress == 2)
                         {
                             $location.path('/userProfile');
 
@@ -517,8 +431,8 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
 
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
-        {
-            alert("File persistance API call successful.");
+        { 
+
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");

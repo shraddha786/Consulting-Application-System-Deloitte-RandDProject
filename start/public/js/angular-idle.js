@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+// Third party js functionality by Mike Grabski under the MIT license (https://github.com/HackedByChinese/ng-idle.git)
+(function(window, angular, undefined) {
+    'use strict';
+    angular.module('ngIdle', ['ngIdle.keepalive', 'ngIdle.idle', 'ngIdle.countdown', 'ngIdle.title', 'ngIdle.localStorage']);
+    angular.module('ngIdle.keepalive', [])
+      .provider('Keepalive', function() {
+        var options = {
+          http: null,
+          interval: 10 * 60
+        };
+    
+        this.http = function(value) {
+          if (!value) throw new Error('Argument must be a string containing a URL, or an object containing the HTTP request configuration.');
+          if (angular.isString(value)) {
+            value = {
+              url: value,
+              method: 'GET'
+            };
+=======
 /*** Directives and services for responding to idle users in AngularJS
  * @author Mike Grabski <me@mikegrabski.com>
  * @version v1.3.2
@@ -45,6 +65,7 @@
 
           function handleResponse(response) {
             $rootScope.$broadcast('KeepaliveResponse', response.data, response.status);
+>>>>>>> 8315513b6cc6d70aa34939872cd2e785c40cab85
           }
 
           function ping() {

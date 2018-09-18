@@ -1,14 +1,34 @@
 <div class="clearfix">
-    <H4>Applicants</p>
-        <div class="post" ng-repeat="user in users | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'">
-            <tr>
-                <td>NAME: {{user.username}}</td>
-                <td>EMAIL: {{user.email}}</td>
-                <td>STAGE: {{user.stage}}</td>
-                <td>STAGE: {{user.desired_location}}</td>
-                <td>ROLE: {{user.role}}</td>
-                <td><button>Hire</button></td>
-                <td><button ng-click="reject(user.username)">Reject</button></td>
-            </tr>
+    <H4 >Applicants</p>
+        
+
+    <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'}"  ng-class-odd="'odd'" ng-class-even="'even'">
+        <tr>
+            <td>NAME: {{user.username}}</td>
+            <td>EMAIL: {{user.email}}</td>
+            <td>STAGE: {{user.stage}}</td>
+            <td>STAGE: {{user.desired_location}}</td>
+            <td>ROLE: {{user.role}}</td>
+            <td><button>Hire</button></td>
+            <td><button ng-click="reject(user.username)">Reject</button></td>
+        </tr>
+    </div>
+    <h4>Applicant CV</h4>
+    <div class="post" ng-repeat="file in files" ng-class-odd="'odd'" ng-class-even="'even'">
+        <hr>
+        <i class="glyphicon glyphicon-book"></i> {{file.filename}}
+        <br>
+        <i>File ID: </i> {{file._id}}
+        <div class="row" style="margin-top: 10px" >
+          <div class="col-md-6">
+            <a href="upload/files/{{file.filename}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i> Download</a>
+          </div>
+          <div class="col-md-6">
+            <form method="DELETE" ng-submit="delete()">
+              <button class="btn btn-danger btn-block  col-md-6"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+            </form>
+          </div>
         </div>
+      </div>
+
 </div>
