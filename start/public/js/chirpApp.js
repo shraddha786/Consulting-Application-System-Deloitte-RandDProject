@@ -396,9 +396,8 @@ app.controller('ProgressBarController', function($scope, $rootScope)
 });
 
 
-app.controller('ScrollAnimationController', function($scope)
+app.controller('ScrollAnimationController', function($scope, $compile, $injector)
 {
-
     $scope.animateElementIn = function($el)
     {
         $el.removeClass('animated fadeOut');
@@ -410,6 +409,18 @@ app.controller('ScrollAnimationController', function($scope)
         $el.addClass('animated fadeOut');
         $el.removeClass('animated fadeIn'); //Leverages animate.css classes
     };
+
+    var test = angular.element(document.getElementById('MainParent').children);
+    
+    test.attr('class',"not-visible");
+    test.attr('when-visible',"animateElementIn");
+    test.attr('when-not-visible',"animateElementOut");
+    $scope = test.scope();
+    $injector = test.injector();
+    $injector.invoke(function($compile)
+    {
+        $compile(test)($scope)
+    })
 });
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
