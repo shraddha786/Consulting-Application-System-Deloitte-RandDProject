@@ -4,6 +4,7 @@
       <h1 class="text-center display-4 my-4">CV Upload</h1><br><br>
 
       <form action="/upload" method="POST" enctype="multipart/form-data">
+        {{current_user}}
         <div class="custom-file mb-3">
           <input type="file" name="file" id="file" class="custom-file-input" accept=".pdf,.doc, .docx, .odt">
         </div>
@@ -15,7 +16,7 @@
         <hr>
         <i class="glyphicon glyphicon-book"></i> {{filename}}
         <br>
-        <i>File ID: </i> add some fileID stuff{{fileID}}
+        <i>File ID: </i> {{filenameID}}
         <div class="row" style="margin-top: 10px">
           <div class="col-md-6">
             <a href="upload/files/{{fileID}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i>

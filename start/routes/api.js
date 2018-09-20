@@ -174,6 +174,10 @@ router.route('/updateinfo/:id')
             {
                 users.stage = req.body.stage;
             }
+            if (req.body.file_ID != null)
+            {
+                users.file_ID = req.body.file_ID;
+            }
 
             users.save(function(err, users)
             {

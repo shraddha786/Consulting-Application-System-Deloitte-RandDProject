@@ -21,7 +21,8 @@ var userSchema = new mongoose.Schema({
 	priority: Boolean,
 	rejected: Boolean,
 	is_staff: Boolean,
-	filename: String
+	filename: String,
+	file_ID: String
 })
 
 

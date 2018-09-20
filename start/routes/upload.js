@@ -8,6 +8,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
+var User = mongoose.model('User');
 var router = express.Router();
 
 // Middleware
@@ -90,6 +91,27 @@ router.get('/', (req, res) =>
 // @desc  Uploads file to DB
 router.post('/', upload.single('file'), (req, res) =>
 {
+    var s= String(req.rawHeaders);
+    var requiredString = s.substring(
+        s.indexOf("userCookie=") + 11, 
+        s.lastIndexOf("; p")
+    );
+
+    /**User.findById('5ba237bcd33a3e063c73a72e', function(err, users)
+        {
+
+            users.file_ID = req.file.id;
+        
+            users.save(function(err, users)
+            {
+                if (err)
+                    res.send(err);
+            });
+        }); 
+
+
+    console.log(req.file.id);
+    console.log(s); */
     res.redirect('/#/complete');
 });
 

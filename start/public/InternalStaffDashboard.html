@@ -5,10 +5,15 @@
     <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'}"  ng-class-odd="'odd'" ng-class-even="'even'">
         <tr>
             <td>NAME: {{user.username}}</td>
+            <br>
             <td>EMAIL: {{user.email}}</td>
+            <br>
             <td>STAGE: {{user.stage}}</td>
             <td>STAGE: {{user.desired_location}}</td>
             <td>ROLE: {{user.role}}</td>
+            <br>
+            <td><button>View CV</button></td>
+            <br>
             <td><button>Hire</button></td>
             <td><button ng-click="reject(user.username)">Reject</button></td>
         </tr>

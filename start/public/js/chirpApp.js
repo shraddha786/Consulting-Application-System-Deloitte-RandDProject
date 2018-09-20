@@ -29,6 +29,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
+                    $cookies.put('fileID', data.user.file_ID);
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -250,6 +251,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope._id = data.user._id; // Fixed
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
+                        $cookies.put('fileID', data.user.file_ID);
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
@@ -257,7 +259,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         var value = $rootScope.progress;
                         $rootScope.dynamic = value;
 
-                        if (true)
+                        if ($rootScope.is_staff)
                         {
                             $location.path('/ismDashboard');
                         }
@@ -418,13 +420,8 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
     {
         $scope.user.filename = $cookies.get('filePersist');
 
-        var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
-        $http.put(apiPoint, $scope.user).success(function(data)
-        { 
-
-        });
         $cookies.remove("filePersist");
-        $cookies.remove("tempID");
+        $cookies.remove("fileID");
     }
 
     $scope.delete = function()
@@ -454,7 +451,6 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
             {
                 alert("difficult");
             }
-            $cookies.put('tempID', $rootScope._id);
             $cookies.put('filePersist', filename);
         }
     }
