@@ -1,3 +1,10 @@
+<!--InternalStaffDashboard.html-->
+<!--
+  This is the html file that contains the content for the internal staff member dashboard.
+  It shows all current applicants that have registered with the system and the stage that 
+  they're at. The staff member can then view the CV they've uploaded, approve them onto
+  the next stage, or reject them.
+-->
 <div class="clearfix">
     <H4 >Applicants</p>
         
@@ -9,12 +16,12 @@
             <td>EMAIL: {{user.email}}</td>
             <br>
             <td>STAGE: {{user.stage}}</td>
-            <td>STAGE: {{user.desired_location}}</td>
+            <td>LOCATION: {{user.desired_location}}</td>
             <td>ROLE: {{user.role}}</td>
             <br>
             <td><button>View CV</button></td>
             <br>
-            <td><button>Hire</button></td>
+            <td><button>Progress</button></td>
             <td><button ng-click="reject(user.username)">Reject</button></td>
         </tr>
     </div>

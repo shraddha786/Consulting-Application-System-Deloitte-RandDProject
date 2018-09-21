@@ -128,12 +128,6 @@ app.config(function($routeProvider)
             templateUrl: 'personalInformation.html',
             controller: 'authController'
         })
-        //the mail page display
-        .when('/mailgunner',
-        {
-            templateUrl: 'mailGunner.html',
-            controller: 'mailController'
-        })
         //the Internal Staff Member Dashboard
         .when('/ismDashboard',
         {
@@ -271,7 +265,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'To finilize your information component, please upload your CV'
+                                    msg: 'To finalize your information component, please upload your CV'
                                 }, //affects alert message box
 
                             ];

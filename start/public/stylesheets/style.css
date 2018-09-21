@@ -1,3 +1,9 @@
+/*
+  style.css
+  This affects all of the styling for the system, as according
+  to Deloitte's brand and design guidelines.
+*/
+
 html {
   min-height: 100%;
   position: relative;

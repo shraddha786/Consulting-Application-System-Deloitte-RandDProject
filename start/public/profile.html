@@ -1,3 +1,9 @@
+<!--profile.html-->
+<!--
+  This is the html file that contains the content which displays when
+  a user is not logged into the system and tries to access a page which
+  requires them to be logged in.
+-->
 <div class="clearfix">
     <p ng-hide="authenticated">You must be logged in to continue any actions</p>
     <form ng-Submit="post()" ng-show='authenticated'>
