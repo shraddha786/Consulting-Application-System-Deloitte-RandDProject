@@ -228,6 +228,8 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
 {
     $rootScope.progress = 2;
 
+ //   $scope.id=2;
+    
     $scope.user = {
         username: '',
         password: ''
