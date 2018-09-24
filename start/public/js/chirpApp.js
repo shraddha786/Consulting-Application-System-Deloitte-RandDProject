@@ -188,12 +188,18 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
     {
         $scope.selectedUser = name;
 
+        var warningDiv = "<div class=\"alert alert-danger\">Candidate has not uploaded a CV</div>"
         if (filename == null) {
-            $scope.selectedFile = 'N/A';
+            $scope.selectedFilePath = "\" disabled";
+            document.getElementById('warning').innerHTML = warningDiv;
+            var buttonDiv = "<a><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\" disabled>View CV</button></a>"
         } else {
-            $scope.selectedFile = filename;
+            $scope.selectedFilePath = "upload/files/" + filename;
+            var buttonDiv = "<a href=\"{{selectedFilePath}}\"><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\">View CV</button></a>"
+            document.getElementById('warning').innerHTML = null;
         }
-        alert($scope.selectedFile);
+        document.getElementById('cvbutton').innerHTML = buttonDiv;
+
     }
 
     $scope.userFilter = function(item) {
