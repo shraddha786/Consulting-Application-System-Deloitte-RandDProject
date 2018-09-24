@@ -1,13 +1,20 @@
 <!--index.html-->
+<!--
+  This is the default/home html file that the browser directs to when the system is run.
+  It contains all of the third-party libraries and dependencies that are used throughout the system,
+  as well as our own custom made JavaScript scripts.
+-->
 <!DOCTYPE html>
-<html lang="en" ng-app="chirpApp">
+<html lang="en" ng-app="chirpApp"><!--ng-app signals to AngularJS that this is the root element of the system.-->
 
+<!--Head-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/Deloitte-D.jpg">
   <title>Firestarter</title>
+  <!--When possible, minified packages of the versions of third-party libraries have been used to increase speed.-->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.js"></script>
@@ -21,6 +28,7 @@
   <link rel="stylesheet" href="stylesheets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
+<!--End of head-->
 
 <body>
   <div class="col-md-offset-2 col-md-8">
@@ -40,27 +48,12 @@
             <a href="#/logout" ng-click="logout()">Logout</a>
           </p>
           <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user}}</p>
-          <!-- WORK IN PROGRESS - LEAVE FOR NOW
-          <p class="navbar-right navbar-text" ng-show="authenticated">
-            <a href="#/cookieBaker">Cookie Functionality</a>
-          </p>
-          <p class="navbar-right navbar-text" ng-show="authenticated">
-            <a href="#/upload">CV upload</a>
-          </p>
-          <p class="navbar-right navbar-text" ng-show="authenticated">
-            <a href="#/userProfile">Personal Details</a>
-          </p>
-          <p class="navbar-right navbar-text" ng-show="authenticated">
-            <a href="#/videoInterview">Video Interview</a>
-          </p>
-          <p class="navbar-right navbar-text" ng-show="authenticated">
-            <a href="#/mailgunner">Email Max</a>
-          </p>
-          -->
         </div>
       </nav>
+     <!--End of navigation bar-->
       <div class="container-fluid" id="content">
         <div ng-controller="AlertsController" ng-hide="hidealert" id="alertID">
+          <!--This script is needed for the alerts to display properly-->
           <script type="text/ng-template" id="alert.html">
             <div class="alert">
               <div ng-transclude></div>
@@ -78,6 +71,12 @@
           </uib-progressbar>
         </div>
 
+        <!--
+          This div below dynamically updates in order to show content depending on the page.
+          For example, when the user is on the landing page, the content from main.html
+          is inside this div. This is done utilising the AngularJS directive ng-view, which
+          allows for this single-page application type of system.
+        -->
         <div ng-view></div>
       </div>
     </div>
@@ -109,6 +108,7 @@
 
     </div>
   </footer>
+  <!--End of footer-->
 </body>
 
 </html>

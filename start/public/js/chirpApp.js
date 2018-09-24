@@ -1,5 +1,10 @@
-// ChirpApp.js
-//chirpApp.js
+/*
+    chirpApp.js
+    This file is our main way of adding JavaScript and AngularJS functionality
+    to the entire system. It includes all of the AngularJS module dependencies that
+    we have used. This file is added to the system by linking it in the index.html 
+    file as a JavaScript script.
+*/
 var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies)
 {
 
@@ -26,7 +31,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.date_of_birth = data.user.date_of_birth;
                     $rootScope.role = data.user.role;
                     $rootScope._id = data.user._id;
-                    //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
                     $cookies.put('fileID', data.user.file_ID);
@@ -84,6 +88,9 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
     });
 });
 
+/*
+    Reroutes the page to the appropriate URL.
+*/
 app.config(function($routeProvider)
 {
     $routeProvider
@@ -127,12 +134,6 @@ app.config(function($routeProvider)
         {
             templateUrl: 'personalInformation.html',
             controller: 'authController'
-        })
-        //the mail page display
-        .when('/mailgunner',
-        {
-            templateUrl: 'mailGunner.html',
-            controller: 'mailController'
         })
         //the Internal Staff Member Dashboard
         .when('/ismDashboard',
@@ -273,7 +274,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'To finilize your information component, please upload your CV'
+                                    msg: 'To finalize your information component, please upload your CV'
                                 }, //affects alert message box
 
                             ];
@@ -372,6 +373,10 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
 
 });
 
+/*
+    Controller for the UI Bootstrap alerts (which tells the applicant what to
+    do next) to appear properly.
+*/
 app.controller('AlertsController', function($scope, $rootScope)
 {
     $rootScope.alerts = [
@@ -389,6 +394,10 @@ app.controller('AlertsController', function($scope, $rootScope)
     };
 });
 
+/*
+    Controller to control and change the UI Bootstrap progress bar that outlines which
+    step the applicant is on.
+*/
 app.controller('ProgressBarController', function($scope, $rootScope)
 {
     $rootScope.max = 5;
@@ -397,7 +406,14 @@ app.controller('ProgressBarController', function($scope, $rootScope)
     $rootScope.dynamic = value;
 });
 
-
+/*
+    Controller to control the fade animation when scrolling on the landing page (i.e.
+    main.html). First, it defines the functions (which are called when scrolling up or 
+    down the page) that removes or adds the fade effect dynamically. Then, it manipulates
+    all child elements within the 'MainParent' div to add the appropriate attributes
+    necessary for the functionality to occur. These attributes are then recompiled so that
+    AngularJS can acknowledge them.
+*/
 app.controller('ScrollAnimationController', function($scope, $compile, $injector)
 {
     $scope.animateElementIn = function($el)
@@ -412,16 +428,16 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
         $el.removeClass('animated fadeIn'); //Leverages animate.css classes
     };
 
-    var test = angular.element(document.getElementById('MainParent').children);
+    var addAttributes = angular.element(document.getElementById('MainParent').children);
     
-    test.attr('class',"not-visible");
-    test.attr('when-visible',"animateElementIn");
-    test.attr('when-not-visible',"animateElementOut");
-    $scope = test.scope();
-    $injector = test.injector();
+    addAttributes.attr('class',"not-visible");
+    addAttributes.attr('when-visible',"animateElementIn");
+    addAttributes.attr('when-not-visible',"animateElementOut");
+    $scope = addAttributes.scope();
+    $injector = addAttributes.injector();
     $injector.invoke(function($compile)
     {
-        $compile(test)($scope)
+        $compile(addAttributes)($scope)
     })
 });
 

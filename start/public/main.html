@@ -1,8 +1,15 @@
+<!--main.html-->
+<!--
+  This is the html file that contains the content for the landing page shown at the
+  very first stage of the system. It explains some key information as to what consulting 
+  at Deloitte is all about.
+-->
 <div class="clearfix">
+    <!--This controller is needed to add the fading in animation of the content when scrolling.-->
     <div ng-controller="ScrollAnimationController">
         <h1>Drive your growth. Fuel your success.</h1>
         <br>
-        <!--All images have been compressed to drastically reduce their file size and thus improve loading speed.-->
+        <!--All images in this file have been compressed to drastically reduce their file size and thus improve loading speed.-->
         <img src="images/LandingPageImage1.PNG" class="img-responsive" alt="Deloitte Consulting Team Cooking">
         <br>
         <h3>In Consulting we use logical thinking, leading global methodologies and our knowledge of industries to help
@@ -19,6 +26,7 @@
             performance of our public and private sector clients.</p>
         <br>
         <br>
+        <!--This div contains all the content that has the fade animation scroll effect, as it is not needed for the content at the top of the page-->
         <div id="MainParent">
             <h2>What qualification will you need?</h2>
             <br>
@@ -129,5 +137,7 @@
                 business
                 strategy</p>
         </div>
+        <!--End of MainParent div-->
     </div>
+    <!--End of ScrollAnimationController div-->
 </div>

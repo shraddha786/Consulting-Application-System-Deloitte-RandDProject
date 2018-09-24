@@ -1,10 +1,14 @@
+<!--register.html-->
+<!--
+  This is the html file that contains the content for the register page for the system.
+  It lets the user enter a username and password that they wish to register with and then
+  it wil automatically redirect them when they click the register button to the appropriate
+   page depending on the type of user.
+-->
 <form class="form-auth" ng-submit="register()" ng-hide="authenticated">
   <h2>Register</h2>
   <p class="text-warning">{{error_message}}</p>
-  <input type="username" ng-model="user.username" placeholder="Username" class="form-control" >
-  <br>
-  <input type="password" ng-model="user.password" placeholder="Password" class="form-control" >
-  <br>
-  <!--<input type="email" ng-model="user.email" placeholder="Email" class="form-control"><br>-->
+  <input type="username" ng-model="user.username" placeholder="Username" class="form-control"><br>
+  <input type="password" ng-model="user.password" placeholder="Password" class="form-control"><br>
   <input type="submit" value="Register" class="btn btn-primary" />
 </form>
