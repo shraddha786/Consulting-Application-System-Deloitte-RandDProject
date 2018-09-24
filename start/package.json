@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@auth0/angular-jwt": "^2.0.0",
     "angular-file-upload": "^2.5.0",
     "angular-scroll-animate": "^0.9.9",
     "angular-ui-bootstrap": "^2.5.6",

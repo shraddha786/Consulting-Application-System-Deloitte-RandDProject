@@ -1,5 +1,5 @@
 // ChirpApp.js
-//chirpApp.js
+
 var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies)
 {
 
@@ -29,7 +29,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
-                    $cookies.put('fileID', data.user.file_ID);
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -82,6 +81,8 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope.hideprog = false;
         };
     });
+
+
 });
 
 app.config(function($routeProvider)
@@ -167,7 +168,7 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
         {
-
+            alert("File persistance API call successful.");
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
@@ -183,6 +184,21 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
     }
     $scope.users = accountService.query();
 
+    $scope.updateUser = function(name, filename) 
+    {
+        $scope.selectedUser = name;
+
+        if (filename == null) {
+            $scope.selectedFile = 'N/A';
+        } else {
+            $scope.selectedFile = filename;
+        }
+        alert($scope.selectedFile);
+    }
+
+    $scope.userFilter = function(item) {
+        return item === $scope.selectedUser;
+    }
 });
 
 app.factory('uploadService', function($resource)
@@ -251,20 +267,16 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope._id = data.user._id; // Fixed
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
-                        $cookies.put('fileID', data.user.file_ID);
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
-
-                        var value = $rootScope.progress;
-                        $rootScope.dynamic = value;
 
                         if ($rootScope.is_staff)
                         {
                             $location.path('/ismDashboard');
                         }
 
-                        else if ($rootScope.progress == 2)
+                        if ($rootScope.progress == 2)
                         {
                             $location.path('/userProfile');
 
@@ -395,9 +407,9 @@ app.controller('ProgressBarController', function($scope, $rootScope)
     $rootScope.dynamic = value;
 });
 
-
-app.controller('ScrollAnimationController', function($scope, $compile, $injector)
+app.controller('ScrollAnimationController', function($scope)
 {
+
     $scope.animateElementIn = function($el)
     {
         $el.removeClass('animated fadeOut');
@@ -409,18 +421,6 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
         $el.addClass('animated fadeOut');
         $el.removeClass('animated fadeIn'); //Leverages animate.css classes
     };
-
-    var test = angular.element(document.getElementById('MainParent').children);
-    
-    test.attr('class',"not-visible");
-    test.attr('when-visible',"animateElementIn");
-    test.attr('when-not-visible',"animateElementOut");
-    $scope = test.scope();
-    $injector = test.injector();
-    $injector.invoke(function($compile)
-    {
-        $compile(test)($scope)
-    })
 });
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
@@ -431,8 +431,13 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
     {
         $scope.user.filename = $cookies.get('filePersist');
 
+        var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
+        $http.put(apiPoint, $scope.user).success(function(data)
+        {
+            alert("File persistance API call successful.");
+        });
         $cookies.remove("filePersist");
-        $cookies.remove("fileID");
+        $cookies.remove("tempID");
     }
 
     $scope.delete = function()
@@ -462,13 +467,14 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
             {
                 alert("difficult");
             }
+            $cookies.put('tempID', $rootScope._id);
             $cookies.put('filePersist', filename);
         }
     }
 
     $scope.files = uploadService.query();
-});
 
+});
 
 app.controller('videoController', function($rootScope, $scope, $cookies, $http)
 {
