@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+// ChirpApp.js
+
+=======
 /*
     chirpApp.js
     This file is our main way of adding JavaScript and AngularJS functionality
@@ -5,6 +9,7 @@
     we have used. This file is added to the system by linking it in the index.html 
     file as a JavaScript script.
 */
+>>>>>>> 164ea6ec7070ee2d53d15c02d88f67dfb033c74e
 var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies)
 {
 
@@ -33,7 +38,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope._id = data.user._id;
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
-                    $cookies.put('fileID', data.user.file_ID);
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -86,6 +90,8 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
             $rootScope.hideprog = false;
         };
     });
+
+
 });
 
 /*
@@ -168,7 +174,7 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
         $http.put(apiPoint, $scope.user).success(function(data)
         {
-
+            alert("File persistance API call successful.");
         });
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
@@ -184,6 +190,27 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
     }
     $scope.users = accountService.query();
 
+    $scope.updateUser = function(name, filename) 
+    {
+        $scope.selectedUser = name;
+
+        var warningDiv = "<div class=\"alert alert-danger\">Candidate has not uploaded a CV</div>"
+        if (filename == null) {
+            $scope.selectedFilePath = "\" disabled";
+            document.getElementById('warning').innerHTML = warningDiv;
+            var buttonDiv = "<a><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\" disabled>View CV</button></a>"
+        } else {
+            $scope.selectedFilePath = "upload/files/" + filename;
+            var buttonDiv = "<a href=\"" + $scope.selectedFilePath + "\"><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\">View CV</button></a>"
+            document.getElementById('warning').innerHTML = null;
+        }
+        document.getElementById('cvbutton').innerHTML = buttonDiv;
+
+    }
+
+    $scope.userFilter = function(item) {
+        return item === $scope.selectedUser;
+    }
 });
 
 app.factory('uploadService', function($resource)
@@ -254,20 +281,16 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope._id = data.user._id; // Fixed
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
-                        $cookies.put('fileID', data.user.file_ID);
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
-
-                        var value = $rootScope.progress;
-                        $rootScope.dynamic = value;
 
                         if ($rootScope.is_staff)
                         {
                             $location.path('/ismDashboard');
                         }
 
-                        else if ($rootScope.progress == 2)
+                        if ($rootScope.progress == 2)
                         {
                             $location.path('/userProfile');
 
@@ -406,6 +429,9 @@ app.controller('ProgressBarController', function($scope, $rootScope)
     $rootScope.dynamic = value;
 });
 
+<<<<<<< HEAD
+app.controller('ScrollAnimationController', function($scope)
+=======
 /*
     Controller to control the fade animation when scrolling on the landing page (i.e.
     main.html). First, it defines the functions (which are called when scrolling up or 
@@ -415,7 +441,9 @@ app.controller('ProgressBarController', function($scope, $rootScope)
     AngularJS can acknowledge them.
 */
 app.controller('ScrollAnimationController', function($scope, $compile, $injector)
+>>>>>>> 164ea6ec7070ee2d53d15c02d88f67dfb033c74e
 {
+
     $scope.animateElementIn = function($el)
     {
         $el.removeClass('animated fadeOut');
@@ -427,6 +455,8 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
         $el.addClass('animated fadeOut');
         $el.removeClass('animated fadeIn'); //Leverages animate.css classes
     };
+<<<<<<< HEAD
+=======
 
     var addAttributes = angular.element(document.getElementById('MainParent').children);
     
@@ -439,6 +469,7 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
     {
         $compile(addAttributes)($scope)
     })
+>>>>>>> 164ea6ec7070ee2d53d15c02d88f67dfb033c74e
 });
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
@@ -449,8 +480,13 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
     {
         $scope.user.filename = $cookies.get('filePersist');
 
+        var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
+        $http.put(apiPoint, $scope.user).success(function(data)
+        {
+            alert("File persistance API call successful.");
+        });
         $cookies.remove("filePersist");
-        $cookies.remove("fileID");
+        $cookies.remove("tempID");
     }
 
     $scope.delete = function()
@@ -480,13 +516,14 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
             {
                 alert("difficult");
             }
+            $cookies.put('tempID', $rootScope._id);
             $cookies.put('filePersist', filename);
         }
     }
 
     $scope.files = uploadService.query();
-});
 
+});
 
 app.controller('videoController', function($rootScope, $scope, $cookies, $http)
 {
