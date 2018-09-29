@@ -46,18 +46,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
 
                     ];
                 }
-                else if ($rootScope.progress == 2)
-                {
-                    $location.path('/userProfile');
-
-                    $rootScope.alerts = [
-                        {
-                            type: 'info',
-                            msg: 'Hello! Please fill out the information below'
-                        }, //affects alert message box
-
-                    ];
-                }
+                
             });
     }
 
@@ -252,6 +241,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
                         $cookies.put('fileID', data.user.file_ID);
+                        $rootScope.progress = data.user.stage;
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
@@ -271,11 +261,35 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'To finilize your information component, please upload your CV'
+                                    msg: 'To finalize your information component, please upload your CV'
                                 }, //affects alert message box
 
                             ];
                         }
+                        else if ($rootScope.progress == 3)
+                        {
+                            $location.path('/cvupload');
+
+                            $rootScope.alerts = [
+                            {
+                                type: 'info',
+                                msg: 'Upload'
+                            }, //affects alert message box
+
+                            ];
+                        }
+                        else if ($rootScope.progress == 3)
+                        {
+                            $location.path('/cvupload');
+
+                            $rootScope.alerts = [
+                            {
+                                type: 'info',
+                                msg: 'Upload your CV'
+                            }, //affects alert message box
+
+                        ];
+                    }
 
                         var value = $rootScope.progress;
                         $rootScope.dynamic = value;
