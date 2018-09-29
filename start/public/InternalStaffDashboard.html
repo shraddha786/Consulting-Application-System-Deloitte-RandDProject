@@ -1,4 +1,29 @@
+<!--InternalStaffDashboard.html-->
+<!--
+  This is the html file that contains the content for the internal staff member dashboard.
+  It shows all current applicants that have registered with the system and the stage that 
+  they're at. The staff member can then view the CV they've uploaded, approve them onto
+  the next stage, or reject them.
+-->
 <div class="clearfix">
+<<<<<<< HEAD
+  <h4>Applicants</h4>
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+      <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="options" id="option2" autocomplete="off"> Archive
+    </label>
+  </div>
+  <br><br>
+  <form>
+    <div class="form-row">
+      <div class="col-sm-12">
+        <label for="namesearch">Name</label>
+        <input id="namesearch" class="form-control" type="search" ng-model="q" placeholder="Filter by name..." aria-label="filter name" />      
+      </div>
+=======
     <H4 >Applicants</p>
         
 
@@ -9,31 +34,95 @@
             <td>EMAIL: {{user.email}}</td>
             <br>
             <td>STAGE: {{user.stage}}</td>
-            <td>STAGE: {{user.desired_location}}</td>
+            <td>LOCATION: {{user.desired_location}}</td>
             <td>ROLE: {{user.role}}</td>
             <br>
             <td><button>View CV</button></td>
             <br>
-            <td><button>Hire</button></td>
+            <td><button>Progress</button></td>
             <td><button ng-click="reject(user.username)">Reject</button></td>
         </tr>
+>>>>>>> 164ea6ec7070ee2d53d15c02d88f67dfb033c74e
     </div>
-    <h4>Applicant CV</h4>
-    <div class="post" ng-repeat="file in files" ng-class-odd="'odd'" ng-class-even="'even'">
-        <hr>
-        <i class="glyphicon glyphicon-book"></i> {{file.filename}}
-        <br>
-        <i>File ID: </i> {{file._id}}
-        <div class="row" style="margin-top: 10px" >
-          <div class="col-md-6">
-            <a href="upload/files/{{file.filename}}" class="btn btn-success btn-block col-md-6" download><i class="glyphicon glyphicon-download-alt"></i> Download</a>
-          </div>
-          <div class="col-md-6">
-            <form method="DELETE" ng-submit="delete()">
-              <button class="btn btn-danger btn-block  col-md-6"><i class="glyphicon glyphicon-trash"></i> Delete</button>
-            </form>
-          </div>
-        </div>
+      <br><br><br><br>
+    <div class="form-row">
+      <div class="col-sm-5 float-left">
+        <label class="mr-sm-2" for="userType">User Type</label>
+        <select class="form-control" id="userType">
+          <option value="" selected></option>
+          <option value="Graduate">Graduate</option>
+          <option value="Intern">Intern</option>
+        </select>
       </div>
+      <div class="col-sm-5 float-left">
+        <label class="mr-sm-2" for="location">Location</label>
+        <select class="form-control" id="location">
+          <option value="" selected></option>
+          <option value="Auckland">Auckland</option>
+          <option value="Wellington">Wellington</option>
+        </select>
+      </div>
+      <div class="col-sm-2 float-left">
+        <label class="mr-sm-2" for="stage">Stage</label>
+        <input id="stage" class="form-control" type="search" ng-model="s" placeholder="1"/>
+      </div>
+    </div>
+  </form>
 
+  <br><br><br><br>
+  
+  <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'} | filter:q"  ng-class-odd="'odd'" ng-class-even="'even'">
+    <tr>
+      <div id="userinfo" style="text-align: left; width: 75%; display: inline-block">
+        <td><b>Name:</b> {{user.username}}</td>
+        <br>
+        <td><b>Email:</b> {{user.email}}</td>
+        <br>
+        <td><b>Stage:</b> {{user.stage}}</td>
+        <br>
+        <td><b>Location:</b> {{user.desired_location}}</td>
+        <br>
+        <td><b>Role:</b> {{user.role}}</td>
+        <br>
+        <!--<td><button ng-click="reject(user.username)">Reject</button></td>-->
+      </div>
+      <div style="float: none; display: inline-block; vertical-align: middle">
+        <button ng-click="updateUser(user.username, user.filename)" class="btn btnsecondary" data-toggle="modal" data-target="#userdetails-modal">View Applicant</button>
+      </div>
+    </tr>
+  </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="userdetails-modal" aria-labelledby="usermodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="usermodal" style="float: left">User Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body" style="overflow: hidden">
+          <div ng-repeat="user in users | filter: {username : selectedUser}: true" style="width: 50%; float: left">
+            <p><b>Name:</b> {{user.username}}</p>
+            <p>
+            <td><b>Email:</b> {{user.email}}</p>
+            <p>
+            <td><b>Stage:</b> {{user.stage}}</p>
+            <p>
+            <td><b>Location:</b> {{user.desired_location}}</p>
+            <p>
+            <td><b>Role:</b> {{user.role}}</p>
+          </div>
+          <div style="overflow: hidden; display: table; width: 50%; float: right">
+            <div id="cvbutton"></div>
+            <br><br>
+            <div id="warning"></div>
+          </div>   
+        </div>
+      <div class="modal-footer" style="text-align: center">
+        <button onclick="insertPrompt('0')" type="button" class="btn btnsecondary">Progress</button>
+        <button onclick="insertPrompt('1')" type="button" class="btn btn-danger" style="background-color: rgb(255, 55, 55) !important">Archive</button>  
+      </div>
+    </div>
+  </div>
 </div>
