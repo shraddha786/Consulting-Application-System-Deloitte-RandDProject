@@ -51,9 +51,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                         }, //affects alert message box
 
                     ];
-                } else if ($rootScope.progress == 3)
-                {
-                    $location.path('/upload');
                 }
                 
             });
