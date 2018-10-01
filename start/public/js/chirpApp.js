@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// ChirpApp.js
-
-=======
 /*
     chirpApp.js
     This file is our main way of adding JavaScript and AngularJS functionality
@@ -9,7 +5,6 @@
     we have used. This file is added to the system by linking it in the index.html 
     file as a JavaScript script.
 */
->>>>>>> 2517ef53009940426fff3b56de8e97b0db468db0
 var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'angular-scroll-animate']).run(function($rootScope, $http, $location, $cookies)
 {
 
@@ -422,9 +417,6 @@ app.controller('ProgressBarController', function($scope, $rootScope)
     $rootScope.dynamic = value;
 });
 
-<<<<<<< HEAD
-app.controller('ScrollAnimationController', function($scope)
-=======
 /*
     Controller to control the fade animation when scrolling on the landing page (i.e.
     main.html). First, it defines the functions (which are called when scrolling up or 
@@ -434,7 +426,6 @@ app.controller('ScrollAnimationController', function($scope)
     AngularJS can acknowledge them.
 */
 app.controller('ScrollAnimationController', function($scope, $compile, $injector)
->>>>>>> 2517ef53009940426fff3b56de8e97b0db468db0
 {
     $scope.animateElementIn = function($el)
     {
@@ -447,8 +438,6 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
         $el.addClass('animated fadeOut');
         $el.removeClass('animated fadeIn'); //Leverages animate.css classes
     };
-<<<<<<< HEAD
-=======
 
     var addAttributes = angular.element(document.getElementById('MainParent').children);
     
@@ -461,7 +450,6 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
     {
         $compile(addAttributes)($scope)
     })
->>>>>>> 2517ef53009940426fff3b56de8e97b0db468db0
 });
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
