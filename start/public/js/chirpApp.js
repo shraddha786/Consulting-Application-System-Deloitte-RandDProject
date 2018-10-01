@@ -34,6 +34,8 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
+                    $rootScope.file_ID = data.user.file_ID;
+                    $rootScope.progress = data.user.stage;
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -49,19 +51,11 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                         }, //affects alert message box
 
                     ];
-                }
-                else if ($rootScope.progress == 2)
+                } else if ($rootScope.progress == 3)
                 {
-                    $location.path('/userProfile');
-
-                    $rootScope.alerts = [
-                        {
-                            type: 'info',
-                            msg: 'Hello! Please fill out the information below'
-                        }, //affects alert message box
-
-                    ];
+                    $location.path('/upload');
                 }
+                
             });
     }
 
@@ -278,6 +272,8 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope._id = data.user._id; // Fixed
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
+                        $cookies.put('fileID', data.user.file_ID);
+                        $rootScope.progress = data.user.stage;
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
@@ -287,7 +283,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $location.path('/ismDashboard');
                         }
 
-                        if ($rootScope.progress == 2)
+                        else if ($rootScope.progress === 2)
                         {
                             $location.path('/userProfile');
 
@@ -299,6 +295,22 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
 
                             ];
                         }
+                        else if ($rootScope.progress === 3)
+                        {
+                            $location.path('/userProfile');
+                        }
+                        else if ($rootScope.progress == 4)
+                        {
+                            $location.path('/logout');
+
+                            $rootScope.alerts = [
+                            {
+                                type: 'info',
+                                msg: 'Progress'
+                            }, //affects alert message box
+
+                        ];
+                    }
 
                         var value = $rootScope.progress;
                         $rootScope.dynamic = value;
@@ -454,17 +466,14 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
 {
+    $scope.user.filename = "sss";
 
-    $rootScope.progress = 3;
     if ($cookies.get('filePersist'))
     {
         $scope.user.filename = $cookies.get('filePersist');
 
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
-        $http.put(apiPoint, $scope.user).success(function(data)
-        {
-            alert("File persistance API call successful.");
-        });
+        $http.put(apiPoint, $scope.user).success(function(data){});
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
     }

@@ -92,12 +92,14 @@ router.get('/', (req, res) =>
 router.post('/', upload.single('file'), (req, res) =>
 {
     var s= String(req.rawHeaders);
+    
     var requiredString = s.substring(
-        s.indexOf("userCookie=") + 11, 
-        s.lastIndexOf("; p")
+        s.indexOf("tempID=") + 7, 
+        s.lastIndexOf("; f")
     );
+    console.log(requiredString);
 
-    /**User.findById('5ba237bcd33a3e063c73a72e', function(err, users)
+    User.findById(requiredString, function(err, users)
         {
 
             users.file_ID = req.file.id;
@@ -111,7 +113,7 @@ router.post('/', upload.single('file'), (req, res) =>
 
 
     console.log(req.file.id);
-    console.log(s); */
+
     res.redirect('/#/complete');
 });
 
