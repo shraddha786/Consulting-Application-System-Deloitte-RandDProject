@@ -19,7 +19,8 @@
             <td>LOCATION: {{user.desired_location}}</td>
             <td>ROLE: {{user.role}}</td>
             <br>
-            <td><button>View CV</button></td>
+
+            <a href="upload/files/{{user.filename}}"  download><button style="color:rgba(0, 0, 0, 0.761);">View CV</button></a>
             <br>
             <td><button>Progress</button></td>
             <td><button ng-click="reject(user.username)">Reject</button></td>
