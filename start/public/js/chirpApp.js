@@ -31,6 +31,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.date_of_birth = data.user.date_of_birth;
                     $rootScope.role = data.user.role;
                     $rootScope._id = data.user._id;
+                    //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
                     $rootScope.file_ID = data.user.file_ID;
@@ -83,9 +84,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
 
 });
 
-/*
-    Reroutes the page to the appropriate URL.
-*/
 app.config(function($routeProvider)
 {
     $routeProvider
@@ -129,6 +127,12 @@ app.config(function($routeProvider)
         {
             templateUrl: 'personalInformation.html',
             controller: 'authController'
+        })
+        //the mail page display
+        .when('/mailgunner',
+        {
+            templateUrl: 'mailGunner.html',
+            controller: 'mailController'
         })
         //the Internal Staff Member Dashboard
         .when('/ismDashboard',
@@ -197,8 +201,8 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
 
     }
 
-    $scope.userFilter = function(item) {
-        return item === $scope.selectedUser;
+    $scope.insertPrompt = function(val)
+    {
     }
 });
 
@@ -245,8 +249,6 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
 {
     $rootScope.progress = 2;
 
- //   $scope.id=2;
-    
     $scope.user = {
         username: '',
         password: ''
@@ -288,8 +290,8 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'Update'
-                                },
+                                    msg: 'To finilize your information component, please upload your CV'
+                                }, //affects alert message box
 
                             ];
                         }
@@ -400,13 +402,8 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
             }
         });
     };
-
 });
 
-/*
-    Controller for the UI Bootstrap alerts (which tells the applicant what to
-    do next) to appear properly.
-*/
 app.controller('AlertsController', function($scope, $rootScope)
 {
     $rootScope.alerts = [
@@ -424,10 +421,6 @@ app.controller('AlertsController', function($scope, $rootScope)
     };
 });
 
-/*
-    Controller to control and change the UI Bootstrap progress bar that outlines which
-    step the applicant is on.
-*/
 app.controller('ProgressBarController', function($scope, $rootScope)
 {
     $rootScope.max = 5;
