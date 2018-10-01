@@ -33,6 +33,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope._id = data.user._id;
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
+                    $rootScope.file_ID = data.user.file_ID;
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -265,11 +266,8 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                         $rootScope._id = data.user._id; // Fixed
                         $rootScope.progress = data.user.stage;
                         $rootScope.is_staff = data.user.is_staff;
-<<<<<<< HEAD
                         $cookies.put('fileID', data.user.file_ID);
                         $rootScope.progress = data.user.stage;
-=======
->>>>>>> 532cad2e300e8f2abd188c34e5aea5835c158e7b
 
                         $cookies.put('userCookie', $rootScope.current_user);
                         $cookies.put('passCookie', $scope.user.password);
@@ -279,7 +277,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $location.path('/ismDashboard');
                         }
 
-                        if ($rootScope.progress == 2)
+                        else if ($rootScope.progress == 2)
                         {
                             $location.path('/userProfile');
 
@@ -486,10 +484,7 @@ app.controller('fileController', function($rootScope, $scope, uploadService, $co
         $scope.user.filename = $cookies.get('filePersist');
 
         var apiPoint = 'api/updateinfo/' + $cookies.get('tempID');
-        $http.put(apiPoint, $scope.user).success(function(data)
-        {
-            alert("File persistance API call successful.");
-        });
+        $http.put(apiPoint, $scope.user).success(function(data){});
         $cookies.remove("filePersist");
         $cookies.remove("tempID");
     }
