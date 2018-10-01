@@ -6,7 +6,6 @@
   the next stage, or reject them.
 -->
 <div class="clearfix">
-<<<<<<< HEAD
   <h4>Applicants</h4>
   <div class="btn-group btn-group-toggle" data-toggle="buttons">
     <label class="btn btn-secondary active">
@@ -21,34 +20,14 @@
     <div class="form-row">
       <div class="col-sm-12">
         <label for="namesearch">Name</label>
-        <input id="namesearch" class="form-control" type="search" ng-model="q" placeholder="Filter by name..." aria-label="filter name" />      
+        <input id="namesearch" class="form-control" type="search" ng-model="u" placeholder="Filter by name..." aria-label="filter name" />      
       </div>
-=======
-    <H4 >Applicants</p>
-        
-
-    <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'}"  ng-class-odd="'odd'" ng-class-even="'even'">
-        <tr>
-            <td>NAME: {{user.username}}</td>
-            <br>
-            <td>EMAIL: {{user.email}}</td>
-            <br>
-            <td>STAGE: {{user.stage}}</td>
-            <td>LOCATION: {{user.desired_location}}</td>
-            <td>ROLE: {{user.role}}</td>
-            <br>
-            <td><button>View CV</button></td>
-            <br>
-            <td><button>Progress</button></td>
-            <td><button ng-click="reject(user.username)">Reject</button></td>
-        </tr>
->>>>>>> 164ea6ec7070ee2d53d15c02d88f67dfb033c74e
     </div>
       <br><br><br><br>
     <div class="form-row">
       <div class="col-sm-5 float-left">
         <label class="mr-sm-2" for="userType">User Type</label>
-        <select class="form-control" id="userType">
+        <select class="form-control" id="userType" ng-model="r">
           <option value="" selected></option>
           <option value="Graduate">Graduate</option>
           <option value="Intern">Intern</option>
@@ -56,10 +35,14 @@
       </div>
       <div class="col-sm-5 float-left">
         <label class="mr-sm-2" for="location">Location</label>
-        <select class="form-control" id="location">
+        <select class="form-control" id="location" ng-model="l">
           <option value="" selected></option>
           <option value="Auckland">Auckland</option>
           <option value="Wellington">Wellington</option>
+          <option value="Hamilton">Hamilton</option>
+					<option value="Dunedin">Dunedin</option>
+					<option value="Christchurch">Chirstchurch</option>
+					<option value="Queenstown">Queenstown</option>
         </select>
       </div>
       <div class="col-sm-2 float-left">
@@ -71,7 +54,7 @@
 
   <br><br><br><br>
   
-  <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'} | filter:q"  ng-class-odd="'odd'" ng-class-even="'even'">
+  <div class="post" ng-repeat="user in users | orderBy:'created_at':true | filter:{ is_staff: '!true'} | filter:{stage:s, username:u, desired_location : l, role:r}"  ng-class-odd="'odd'" ng-class-even="'even'">
     <tr>
       <div id="userinfo" style="text-align: left; width: 75%; display: inline-block">
         <td><b>Name:</b> {{user.username}}</td>
