@@ -34,6 +34,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
                     $rootScope.file_ID = data.user.file_ID;
+                    $rootScope.progress = data.user.stage;
 
                     var value = $rootScope.progress; //affects progress bar
                     $rootScope.dynamic = value;
@@ -49,6 +50,9 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                         }, //affects alert message box
 
                     ];
+                } else if ($rootScope.progress == 3)
+                {
+                    $location.path('/upload');
                 }
                 
             });
@@ -277,38 +281,30 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $location.path('/ismDashboard');
                         }
 
-                        else if ($rootScope.progress == 2)
+                        else if ($rootScope.progress === 2)
                         {
                             $location.path('/userProfile');
 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'To finalize your information component, please upload your CV'
-                                }, //affects alert message box
+                                    msg: 'Update'
+                                },
 
                             ];
                         }
-                        else if ($rootScope.progress == 3)
+                        else if ($rootScope.progress === 3)
                         {
-                            $location.path('/cvupload');
+                            $location.path('/userProfile');
+                        }
+                        else if ($rootScope.progress == 4)
+                        {
+                            $location.path('/logout');
 
                             $rootScope.alerts = [
                             {
                                 type: 'info',
-                                msg: 'Upload'
-                            }, //affects alert message box
-
-                            ];
-                        }
-                        else if ($rootScope.progress == 3)
-                        {
-                            $location.path('/cvupload');
-
-                            $rootScope.alerts = [
-                            {
-                                type: 'info',
-                                msg: 'Upload your CV'
+                                msg: 'Progress'
                             }, //affects alert message box
 
                         ];
@@ -477,8 +473,8 @@ app.controller('ScrollAnimationController', function($scope, $compile, $injector
 
 app.controller('fileController', function($rootScope, $scope, uploadService, $cookies, $http)
 {
+    $scope.user.filename = "sss";
 
-    $rootScope.progress = 3;
     if ($cookies.get('filePersist'))
     {
         $scope.user.filename = $cookies.get('filePersist');
