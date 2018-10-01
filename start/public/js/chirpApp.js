@@ -434,7 +434,6 @@ app.controller('ProgressBarController', function($scope, $rootScope)
 */
 app.controller('ScrollAnimationController', function($scope, $compile, $injector)
 {
-
     $scope.animateElementIn = function($el)
     {
         $el.removeClass('animated fadeOut');
