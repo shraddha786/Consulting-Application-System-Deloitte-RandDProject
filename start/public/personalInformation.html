@@ -3,6 +3,7 @@
   This is the html file that contains the content for the second stage of the
   application process, where the applicant enters their personal information.
 -->
+<<<<<<< HEAD
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -48,3 +49,41 @@
 		</div>
 	</div>
 </div>
+=======
+<form class="form-auth" ng-submit="updateInformation(email, desired_location, date_of_birth, role)">
+    <div class="form-group">
+
+        <label for="InputEmail">
+            Email address
+        </label>
+        <input type="email" placeholder="{{email}}" class="form-control" id="InputEmail" ng-model="email" required />
+    </div>
+    <div class="form-group">
+
+        <label for="InputLocation">
+            Desired location
+        </label>
+        <input type="text" placeholder="{{desired_location}}" class="form-control" id="InputLocation" pattern="[A-Za-z ]*" ng-model="desired_location" required />
+    </div>
+
+    <div class="form-group">
+
+        <label for="InputBirthDate">
+            Date of birth
+        </label>
+        <input type="text" placeholder="{{date_of_birth}}" class="form-control" id="InputBirthDate" pattern="\d{1,2}/\d{1,2}/\d{4}" ng-model="date_of_birth" required />
+    </div>
+
+    <div class="form-group">
+
+        <label for="InputGraduate">
+            Grad or intern?
+        </label>
+        <input type="text" placeholder="{{role}}" class="form-control" id="InputGraduate" pattern="[A-Za-z ]*" ng-model="role" required />
+    </div>
+
+    <div class="form-group">
+
+        <input type="submit" id="Update" value="Next" class="btn btn-primary" style='float: right;' />
+</form>
+>>>>>>> 2517ef53009940426fff3b56de8e97b0db468db0
