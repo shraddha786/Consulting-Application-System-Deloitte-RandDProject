@@ -31,7 +31,6 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.date_of_birth = data.user.date_of_birth;
                     $rootScope.role = data.user.role;
                     $rootScope._id = data.user._id;
-                    //$rootScope.progress = data.user.stage; TEMPORALILY REMOVE
                     $rootScope.is_staff = data.user.is_staff;
                     $rootScope.filename = data.user.filename;
                     $rootScope.file_ID = data.user.file_ID;
@@ -47,7 +46,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.alerts = [
                         {
                             type: 'info',
-                            msg: 'Work hard you are being paid by the hour bozzo'
+                            msg: 'Manage your applicants here'
                         }, //affects alert message box
 
                     ];
@@ -81,6 +80,9 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
 
 });
 
+/*
+    Reroutes the page to the appropriate URL.
+*/
 app.config(function($routeProvider)
 {
     $routeProvider
@@ -175,7 +177,6 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         if (confirm("Are you sure you want to reject " + val + "?", "Yes I am sure"))
         {
             prompt("Is there anything you would like to add?", "leave default rejection letter or add more here");
-            alert("THIS IS WHERE ARCHIVE USER WOULD BE CALLED AND A PAGE REFRESH WOULD HAPPEN");
         }
     }
     $scope.users = accountService.query();
@@ -287,7 +288,7 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
                             $rootScope.alerts = [
                                 {
                                     type: 'info',
-                                    msg: 'To finilize your information component, please upload your CV'
+                                    msg: 'To finalize your information component, please upload your CV'
                                 }, //affects alert message box
 
                             ];
@@ -401,6 +402,10 @@ app.controller('authController', function($scope, $rootScope, $http, $location, 
     };
 });
 
+/*
+    Controller for the UI Bootstrap alerts (which tells the applicant what to
+    do next) to appear properly.
+*/
 app.controller('AlertsController', function($scope, $rootScope)
 {
     $rootScope.alerts = [
@@ -418,6 +423,10 @@ app.controller('AlertsController', function($scope, $rootScope)
     };
 });
 
+/*
+    Controller to control and change the UI Bootstrap progress bar that outlines which
+    step the applicant is on.
+*/
 app.controller('ProgressBarController', function($scope, $rootScope)
 {
     $rootScope.max = 5;
