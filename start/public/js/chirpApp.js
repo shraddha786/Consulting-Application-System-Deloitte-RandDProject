@@ -46,7 +46,7 @@ var app = angular.module('chirpApp', ['ngRoute', 'ngResource', 'ngCookies', 'ngA
                     $rootScope.alerts = [
                         {
                             type: 'info',
-                            msg: 'Work hard you are being paid by the hour bozzo'
+                            msg: 'Manage your applicants here'
                         }, //affects alert message box
 
                     ];
@@ -177,7 +177,6 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         if (confirm("Are you sure you want to reject " + val + "?", "Yes I am sure"))
         {
             prompt("Is there anything you would like to add?", "leave default rejection letter or add more here");
-            alert("THIS IS WHERE ARCHIVE USER WOULD BE CALLED AND A PAGE REFRESH WOULD HAPPEN");
         }
     }
     $scope.users = accountService.query();

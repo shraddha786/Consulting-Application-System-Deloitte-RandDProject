@@ -67,7 +67,8 @@
         <br>
         <td><b>Role:</b> {{user.role}}</td>
         <br>
-        <!--<td><button ng-click="reject(user.username)">Reject</button></td>-->
+        <td><button ng-click="reject(user.username)">Reject</button></td>
+        <a href="upload/files/{{user.filename}}" class="btn btn-success btn-block col-md-6" download>View CV</a>
       </div>
       <div style="float: none; display: inline-block; vertical-align: middle">
         <button ng-click="updateUser(user.username, user.filename)" class="btn btnsecondary" data-toggle="modal" data-target="#userdetails-modal">View Applicant</button>
