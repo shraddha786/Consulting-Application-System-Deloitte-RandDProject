@@ -138,3 +138,17 @@ footer {
   font-size: 9px;
   display: inline;
 }
+
+#promptdiv {
+  transition: ease 1s;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

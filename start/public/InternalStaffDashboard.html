@@ -99,11 +99,24 @@
             <div id="cvbutton"></div>
             <br><br>
             <div id="warning"></div>
-          </div>   
+            <div id="priority" style="text-align: center">Priority Applicant<br><input type="checkbox" class="form-control" value="isPrio"></div>   
+        </div>
         </div>
       <div class="modal-footer" style="text-align: center">
-        <button onclick="insertPrompt('0')" type="button" class="btn btnsecondary">Progress</button>
-        <button onclick="insertPrompt('1')" type="button" class="btn btn-danger" style="background-color: rgb(255, 55, 55) !important">Archive</button>  
+        <button ng-click="insertPrompt('0')" type="button" class="btn btnsecondary">Progress</button>
+        <button ng-click="insertPrompt('1')" type="button" class="btn btn-danger" style="background-color: rgb(255, 55, 55) !important">Archive</button>
+        <div id="promptDivConfirm" style="display: none">
+            <hr class="col-xs-12"><p>This will progress the candidate to the next stage. Are you sure?</p>
+            <br><button class="btn btnsecondary" ng-click"approve()">Confirm</button> 
+            <button ng-click="clearPrompt()" class="btn btnsecondary" id="cancel">Cancel</button>
+        </div>
+        <div id="promptDivArchive" style="display: none">
+            <hr class="col-s-12"><p>This will archive the user and place them into a seperate list. Are you sure?</p>
+            <br><p>Any notes will be saved upon archive.</p>
+            <textarea class="form-control" id="prompttextarea" ng-model="rejectMessage"></textarea>
+            <br><br><button class="btn btnsecondary" ng-click="reject(rejectMessage)">Archive</button>
+            <button ng-click="clearPrompt()" class="btn btnsecondary" id="cancel">Cancel</button>
+        </div>
       </div>
     </div>
   </div>

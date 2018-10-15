@@ -172,35 +172,53 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         $cookies.remove("tempID");
     }
 
-    $scope.reject = function(val)
+    $scope.reject = function(note)
     {
-        if (confirm("Are you sure you want to reject " + val + "?", "Yes I am sure"))
-        {
-            prompt("Is there anything you would like to add?", "leave default rejection letter or add more here");
-        }
+        // Utilise the Selected User Variables to pass the user through database
     }
+
+    $scope.approve = function(val)
+    {
+        // Utilise the Selected User Variables to pass the user through database
+    }
+
     $scope.users = accountService.query();
 
     $scope.updateUser = function(name, filename) 
     {
         $scope.selectedUser = name;
 
+        document.getElementById('promptDivConfirm').setAttribute("style", "display: none");
+        document.getElementById('promptDivArchive').setAttribute("style", "display: none");
+
         var warningDiv = "<div class=\"alert alert-danger\">Candidate has not uploaded a CV</div>"
         if (filename == null) {
             $scope.selectedFilePath = "\" disabled";
             document.getElementById('warning').innerHTML = warningDiv;
-            var buttonDiv = "<a><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\" disabled>View CV</button></a>"
+            var buttonDiv = "<a><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\" disabled>Download CV</button></a>"
         } else {
             $scope.selectedFilePath = "upload/files/" + filename;
-            var buttonDiv = "<a href=\"" + $scope.selectedFilePath + "\"><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\">View CV</button></a>"
+            var buttonDiv = "<a href=\"" + $scope.selectedFilePath + "\"><button class=\"btn btnsecondary\" style=\"width: 40%; margin-left: 30%; margin-right: 30%; vertical-align: bottom\">Download CV</button></a>"
             document.getElementById('warning').innerHTML = null;
         }
         document.getElementById('cvbutton').innerHTML = buttonDiv;
-
     }
 
     $scope.insertPrompt = function(val)
     {
+        if (val == '0') {
+            document.getElementById('promptDivConfirm').setAttribute("style", "display: block");
+            document.getElementById('promptDivArchive').setAttribute("style", "display: none");
+        } else {
+            document.getElementById('promptDivConfirm').setAttribute("style", "display: none");
+            document.getElementById('promptDivArchive').setAttribute("style", "display: block");
+        }
+    }
+
+    $scope.clearPrompt = function() 
+    {
+        document.getElementById('promptDivConfirm').setAttribute("style", "display: none");
+        document.getElementById('promptDivArchive').setAttribute("style", "display: none");
     }
 });
 
