@@ -16,8 +16,8 @@ var mongoose = require('mongoose'); //add for Mongo support
 mongoose.connect('mongodb://localhost/test-chirp'); //connect to Mongo
 var app = express();
 
-var api_key = '4a94b9ddc7e28006170e29b9e7ab5a0b-8889127d-d9d89be0';
-var domain = 'sandboxdc705a9195684b13948ef2946002cf14.mailgun.org';
+var api_key = 'c55cd8888b182d32dfed3d3c619db567-0e6e8cad-b0106ba8';
+var domain = 'sandbox9cd11e85a9b84a29b66264cba0192425.mailgun.org';
 var mailgun = require('mailgun-js')(
 {
     apiKey: api_key,
@@ -37,10 +37,10 @@ app.get('/mailgun', function(req, res, next)
 {
 
     var data = {
-        from: 'Employment <maxfrancis212@gmail.com>',
+        from: 'Deloitte Recruiting',
         to: 'maxfrancis212@gmail.com',
-        subject: 'Rejected',
-        text: 'You smell like Camembert go away!, Deloitte Recruiting'
+        subject: 'Stage 2',
+        text: 'Thank you applying! please continue progressing through the next few directed stages to be considered for a position'
     };
 
     mailgun.messages().send(data, function(error, body) {});
@@ -116,6 +116,25 @@ app.use(function(err, req, res, next)
         message: err.message,
         error:
         {}
+    });
+});
+
+//Also remember to use the routes folder
+app.get('/rejection', function(req, res, next)
+{
+
+    var data = {
+        from: 'Deloitte Recruiting',
+        to: 'maxfrancis212@gmail.com',
+        subject: 'Graduate / Internship Information',
+        text: 'Thank you applying! unfortunately you have not been considered for the role applied. We thank you for your time'
+    };
+
+    mailgun.messages().send(data, function(error, body) {});
+
+    res.send(
+    {
+        state: 'success'
     });
 });
 
