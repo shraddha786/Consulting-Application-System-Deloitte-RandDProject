@@ -4,8 +4,19 @@ describe('authController', function() {
 
     var $controller, $rootScope;
 
+    var values, factory;
+
     beforeEach(function() {  
         module = angular.module("chirpApp",[]);
+    });
+
+    inject(function ($injector){
+        factory = $injector.get('postService');
+
+    })
+
+    it("Should have post service factory",function(){
+       // expect(factory.j).toEqual(2);
     });
 
     it("should be registered", function() {
@@ -14,29 +25,29 @@ describe('authController', function() {
         expect(mod).not.toBeNull();
       });
 
-      beforeEach(inject(function (_$controller_){
-          $controller = _$controller_;
-      }))
-    // beforeEach(inject(function(_$controller_, _$rootScope_){
-    //     // The injector unwraps the underscores (_) from around the parameter names when matching
-    //     $controller = _$controller_;
-    //     $rootScope = _$rootScope_;
-    //   }));
+    //   beforeEach(inject(function (_$controller_){
+    //       $controller = _$controller_;
+    //   }))
+    beforeEach(inject(function(_$controller_, _$rootScope_){
+        // The injector unwraps the underscores (_) from around the parameter names when matching
+        $controller = _$controller_;
+        $rootScope = _$rootScope_;
+      }));
 
-    describe('$scope.progress', function() {
-        it('AlertsController', function() {
-          var $scope = {};
-        //  var controller = $controller('AlertsController', { $scope: $scope });
-          expect($scope.id).toEqual($scope.id);
-       });
-    describe('scope_id', function(){
-        it('check scope id', function(){
-            //  var scope=$rootscope.$new();
-            //  var controller=$controller('authController', { $scope: scope });
-            //  //$scope.id = 2;
-            //  expect(scope.id).toBe(2);
-         });
-     });
+    // describe('$scope.progress', function() {
+    //     it('AlertsController', function() {
+    //       var $scope = {};
+    //     //  var controller = $controller('AlertsController', { $scope: $scope });
+    //       expect($scope.id).toEqual($scope.id);
+    //    });
+    // describe('scope_id', function(){
+    //     it('check scope id', function(){
+    //         var scope=$rootscope.$new();
+    //          var controller=$controller('authController', { $scope: scope });
+    //         //  //$scope.id = 2;
+    //         //  expect(scope.id).toBe(2);
+    //      });
+    //  });
 
      // describe('$scope.ID', function() {
     //     it('Check the scope object', function() {
@@ -45,4 +56,4 @@ describe('authController', function() {
     //         expect($rootscope.progress).toEqual(5);
     //     });
      });
-});
+//});
