@@ -172,11 +172,18 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         $cookies.remove("tempID");
     }
 
+    /* This function is called when internal staff clicks archive button for the selected applicant.
+        It requests the staff to add the notes as a reason for archieving the applicant.
+    */
     $scope.reject = function(note)
     {
         // Utilise the Selected User Variables to pass the user through database
     }
 
+    /* This function is called when internal staff clicks progress and presses confirm button for the selected applicant.
+        It stages the applicant to next stage and cause an automated email to be sent out to the applicant.
+        This extra button is used to make sure the internal staff wants to stage the application to next stage.
+    */
     $scope.approve = function(val)
     {
         // Utilise the Selected User Variables to pass the user through database
@@ -184,6 +191,11 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
 
     $scope.users = accountService.query();
 
+    /* This function is called when staff clicks view applicant button on ISM dashboard.
+        It takes 2 argument name- selected applicant name and the associated CV which is stored in filename variable.
+        It shows the details of the applicant like what role they applied, what stage they are, if they have uploaded a CV, a button to download & view it,
+        a checkbox to set priority of applicant & button to progress/arhieve the applicant.
+    */
     $scope.updateUser = function(name, filename) 
     {
         $scope.selectedUser = name;
@@ -204,6 +216,10 @@ app.controller('ismController', function($rootScope, $scope, accountService, $co
         document.getElementById('cvbutton').innerHTML = buttonDiv;
     }
 
+    /* This function is called when user selects progress or archieve button on applicant's details dailog box.
+        It takes val argument to show the div element according to the button selected, if 1, show archive div element
+         or show the confirm div element if the staff selects progress button.
+    */
     $scope.insertPrompt = function(val)
     {
         if (val == '0') {
